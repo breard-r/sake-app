@@ -5,12 +5,21 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
+	plugins: [
+		vue(),
+	],
+	resolve: {
+		alias: {
+			'@': fileURLToPath(new URL('./src', import.meta.url))
+		}
+	},
+	build: {
+		// https://rollupjs.org/configuration-options/
+		rollupOptions: {
+			output: {
+				entryFileNames: 'assets/[name].js',
+				assetFileNames: 'assets/sake.min[extname]',
+			}
+		}
+	}
 })

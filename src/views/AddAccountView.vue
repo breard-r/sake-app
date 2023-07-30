@@ -123,7 +123,7 @@ const resetErrorMessage = () => {
 	</div>
 	<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected"></qrcode-stream>
 	<div class="buttons is-centered">
-		<button class="button is-success" :disabled="addDisabled" @click="addAccount">Add account</button>
+		<button class="button is-primary" :disabled="addDisabled" @click="addAccount">Add account</button>
 		<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">Cancel</button>
 	</div>
 </template>

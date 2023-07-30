@@ -45,7 +45,7 @@ const addAccount = () => {
 				key: key,
 			};
 			accounts.value.push(newAccount);
-			return router.push('/');
+			return toMainView();
 		} catch (e) {
 			console.log(e);
 		}

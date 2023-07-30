@@ -11,22 +11,27 @@ const localPart = ref('');
 const separator = ref('+');
 const domainName = ref('');
 const privateKey = ref('');
+const errorMessage = ref('');
 
 const base64Decode = (str_b64) => {
-	const raw_str = atob(str_b64);
-	const length = raw_str.length;
-	var b = [];
-	for (var i = 0; i < length; i++) {
-		b.push(raw_str.charCodeAt(i));
+	try {
+		const raw_str = atob(str_b64);
+		const length = raw_str.length;
+		var b = [];
+		for (var i = 0; i < length; i++) {
+			b.push(raw_str.charCodeAt(i));
+		}
+		return b;
+	} catch (e) {
+		throw new Error('The key must be a valid base64 string.');
 	}
-	return b;
 };
 
 // Add account button
 const addDisabled = computed(() => {
 	const params = [
 		localPart.value,
-		separator.value.length == 1,
+		separator.value,
 		domainName.value,
 		privateKey.value
 	];
@@ -35,6 +40,9 @@ const addDisabled = computed(() => {
 const addAccount = () => {
 	if (!addDisabled.value) {
 		try {
+			if (separator.value.length != 1) {
+				throw new Error('The separator must be a single character.');
+			}
 			const key = base64Decode(privateKey.value);
 			const hash = sha256(`${localPart.value}@${domainName.value}`);
 			const newAccount = {
@@ -47,7 +55,7 @@ const addAccount = () => {
 			accounts.value.push(newAccount);
 			return toMainView();
 		} catch (e) {
-			console.log(e);
+			errorMessage.value = e.message;
 		}
 	}
 };
@@ -59,10 +67,19 @@ const cancellDisabled = computed(() => {
 const toMainView = () => {
 	return router.push('/');
 };
+
+// Error message
+const resetErrorMessage = () => {
+	errorMessage.value = '';
+};
 </script>
 
 <template>
 	<h1 class="title is-1">Add a new account</h1>
+	<div class="notification is-danger is-light" v-if="errorMessage">
+		<button class="delete" @click="resetErrorMessage"></button>
+		{{ errorMessage }}
+	</div>
 	<div class="container" id="new-account-error-msg-container"></div>
 	<div class="field">
 		<label class="label" for="new-addr-local-part">Local part</label>

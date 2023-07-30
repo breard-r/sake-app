@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core'
+import { QrcodeStream } from 'vue-qrcode-reader'
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
 
@@ -60,6 +61,18 @@ const addAccount = () => {
 	}
 };
 
+// QR code reader
+const scanQrCode = ref(false);
+const showQrCodeScanner = (data) => {
+	scanQrCode.value = true;
+};
+const onQrCodeDetected = (result_list) => {
+	if (result_list.length >= 1) {
+		privateKey.value = result_list[0].rawValue;
+		scanQrCode.value = false;
+	}
+};
+
 // Cancel button
 const cancellDisabled = computed(() => {
 	return !accounts.value.length;
@@ -99,12 +112,16 @@ const resetErrorMessage = () => {
 			<input class="input" type="text" id="new-addr-domain" placeholder="example.org" v-model="domainName">
 		</div>
 	</div>
-	<div class="field">
-		<label class="label" for="new-addr-key">Private key</label>
-		<div class="control">
+	<label class="label" for="new-addr-key">Private key</label>
+	<div class="field has-addons">
+		<div class="control is-expanded">
 			<input class="input" type="text" id="new-addr-key" v-model="privateKey">
 		</div>
+		<p class="control">
+			<a class="button is-primary" @click="showQrCodeScanner">Scan</a>
+		</p>
 	</div>
+	<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected"></qrcode-stream>
 	<div class="buttons is-centered">
 		<button class="button is-success" :disabled="addDisabled" @click="addAccount">Add account</button>
 		<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">Cancel</button>

@@ -23,6 +23,10 @@ npm run build
 
 ## Frequently Asked Questions
 
+## Can I use this app without self-hosting it?
+
+Unfortunately, although it would be ok, there is currently no known hosted version of this application. This should change in the future.
+
 ## Can I use this app completely offline?
 
 Currently, you only need the network connectivity to load the application. Once it's loaded, it can be used without access to the network.

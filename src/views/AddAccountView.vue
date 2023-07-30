@@ -1,9 +1,11 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStorage } from '@vueuse/core'
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
 
+const accounts = useStorage('sake-accounts', []);
 const router = useRouter();
 const localPart = ref('');
 const separator = ref('+');
@@ -17,7 +19,7 @@ const base64Decode = (str_b64) => {
 	for (var i = 0; i < length; i++) {
 		b.push(raw_str.charCodeAt(i));
 	}
-	return Uint8Array.from(b);
+	return b;
 };
 
 // Add account button
@@ -42,7 +44,8 @@ const addAccount = () => {
 				domain: domainName.value,
 				key: key,
 			};
-			console.log(newAccount);
+			accounts.value.push(newAccount);
+			return router.push('/');
 		} catch (e) {
 			console.log(e);
 		}

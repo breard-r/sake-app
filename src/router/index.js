@@ -3,6 +3,7 @@ import { useStorage } from '@vueuse/core'
 
 import MainView from '../views/MainView.vue';
 import AddAccountView from '../views/AddAccountView.vue';
+import DeleteAccountView from '../views/DeleteAccountView.vue';
 
 const accounts = useStorage('sake-accounts', []);
 const router = createRouter({
@@ -20,6 +21,10 @@ const router = createRouter({
 		{
 			path: '/add-account',
 			component: AddAccountView
+		},
+		{
+			path: '/delete-account/:id',
+			component: DeleteAccountView,
 		},
 	]
 });

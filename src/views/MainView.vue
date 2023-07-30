@@ -1,11 +1,12 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core'
 import { hmac } from '@noble/hashes/hmac';
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
 
+const router = useRouter();
 const accounts = useStorage('sake-accounts', []);
 const selectedAccountId = ref(accounts.value[0].id);
 const subAddrName = ref('');
@@ -38,8 +39,7 @@ const generatedAddr = computed(() => {
 	return '';
 });
 const deleteAccount = () => {
-	accounts.value = accounts.value.filter((e) => e.id !== selectedAccountId.value);
-	selectedAccountId.value = accounts.value[0].id;
+	return router.push(`/delete-account/${selectedAccountId.value}`);
 };
 const copyAddr = () => {
 	navigator.clipboard.writeText(generatedAddr.value);

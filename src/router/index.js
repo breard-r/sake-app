@@ -11,6 +11,7 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
+			name: 'main',
 			component: MainView,
 			beforeEnter: (to, from) => {
 				if (!accounts.value.length) {
@@ -20,10 +21,12 @@ const router = createRouter({
 		},
 		{
 			path: '/add-account',
+			name: 'add-account',
 			component: AddAccountView
 		},
 		{
 			path: '/delete-account/:id',
+			name: 'delete-account',
 			component: DeleteAccountView,
 		},
 	]

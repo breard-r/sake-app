@@ -14,4 +14,4 @@ jobs:
       - name: Install license-checker
         run: npm install --global license-checker
       - name: Run the license-checker
-        run: npx license-checker --summary --excludePrivatePackages --unknown --onlyAllow 'Apache-2.0;BSD-2-Clause;BSD-3-Clause;CC0-1.0;ISC;MIT'
+        run: npx license-checker --excludePrivatePackages --unknown --onlyAllow 'Apache-2.0;BSD-2-Clause;BSD-3-Clause;CC0-1.0;ISC;MIT'

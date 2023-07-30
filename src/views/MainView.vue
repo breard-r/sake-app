@@ -37,7 +37,10 @@ const generatedAddr = computed(() => {
 	}
 	return '';
 });
-
+const deleteAccount = () => {
+	accounts.value = accounts.value.filter((e) => e.id !== selectedAccountId.value);
+	selectedAccountId.value = accounts.value[0].id;
+};
 const copyAddr = () => {
 	navigator.clipboard.writeText(generatedAddr.value);
 };
@@ -55,7 +58,7 @@ const copyAddr = () => {
 			</div>
 		</div>
 		<p class="control">
-			<a class="button is-danger">Delete</a>
+			<a class="button is-danger" @click="deleteAccount">Delete</a>
 		</p>
 		<p class="control">
 			<RouterLink to="/add-account" class="button is-primary">New</RouterLink>

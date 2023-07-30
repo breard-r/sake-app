@@ -1,0 +1,17 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  integration-test:
+    name: Integration test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Apt update
+        run: sudo apt update
+      - name: Install npm
+        run: sudo apt install -y npm
+      - name: Install license-checker
+        run: npm install --global license-checker
+      - name: Run the license-checker
+        run: npx license-checker --summary --excludePrivatePackages --unknown --onlyAllow 'Apache-2.0;BSD-2-Clause;BSD-3-Clause;CC0-1.0;ISC;MIT'

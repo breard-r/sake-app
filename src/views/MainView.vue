@@ -75,13 +75,13 @@ const copyAddr = () => {
 			<input class="input" type="text" id="sub-addr-name" placeholder="Text input" v-model="subAddrName">
 		</div>
 	</div>
-	<label class="label" for="generated-addr">Address</label>
-	<div class="field has-addons">
-		<div class="control is-expanded">
+	<div class="field">
+		<label class="label" for="generated-addr">Address</label>
+		<div class="control">
 			<input class="input" type="text" id="generated-addr" v-model="generatedAddr" disabled>
 		</div>
-		<p class="control">
-			<a class="button is-primary" @click="copyAddr">Copy</a>
-		</p>
+	</div>
+	<div class="buttons is-centered">
+		<button class="button is-primary" @click="copyAddr">Copy</button>
 	</div>
 </template>

@@ -8,6 +8,11 @@ import base32Encode from 'base32-encode';
 
 const router = useRouter();
 const accounts = useStorage('sake-accounts', []);
+accounts.value.sort((a, b) => {
+	const va = `${a.localPart}@${a.domain}`;
+	const vb = `${b.localPart}@${b.domain}`;
+	return va.localeCompare(vb);
+});
 const selectedAccountId = ref(accounts.value[0].id);
 const subAddrName = ref('');
 

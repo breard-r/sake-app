@@ -54,8 +54,7 @@ const addAccount = () => {
 
 // Cancel button
 const cancellDisabled = computed(() => {
-	// TODO: return true if there is no account in the local storage
-	return false;
+	return !accounts.value.length;
 });
 const toMainView = () => {
 	return router.push('/');

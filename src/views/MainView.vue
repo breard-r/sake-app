@@ -1,5 +1,8 @@
 <script setup>
-import {ref, computed} from "vue";
+import { ref, computed } from 'vue';
+import { hmac } from '@noble/hashes/hmac';
+import { sha256 } from '@noble/hashes/sha256';
+import base32Encode from 'base32-encode'
 
 const accounts = [
 	{
@@ -7,27 +10,34 @@ const accounts = [
 		localPart: 'a',
 		separator: '+',
 		domain: 'example.org',
-		key: [215, 91, 232, 137, 231, 202, 228, 248, 2, 95, 145, 117, 77, 55, 46, 161],
+		key: Uint8Array.from([215, 91, 232, 137, 231, 202, 228, 248, 2, 95, 145, 117, 77, 55, 46, 161]),
 	},
 	{
 		id: '6ff7bae6-6c6c-43d7-a75c-859e6ecbdbd8',
 		localPart: 'b',
 		separator: '+',
 		domain: 'example.org',
-		key: [215, 91, 232, 137, 231, 202, 228, 248, 2, 95, 145, 117, 77, 55, 46, 161],
+		key: Uint8Array.from([215, 91, 232, 137, 231, 202, 228, 248, 2, 95, 145, 117, 77, 55, 46, 161]),
 	},
 ];
-const selectedAccountId = ref("6ff7bae6-6c6c-43d7-a75c-859e6ecbdbd8");
-const subAddrName = ref("");
+const selectedAccountId = ref('6ff7bae6-6c6c-43d7-a75c-859e6ecbdbd8');
+const subAddrName = ref('');
 const generatedAddr = computed(() => {
 	if (selectedAccountId.value && subAddrName.value) {
 		const account = accounts.find((e) => e.id == selectedAccountId.value);
 		if (account) {
-			const code = 'todo';
+			var hasher = hmac.create(sha256, account.key);
+			hasher.update(account.localPart);
+			hasher.update(account.separator);
+			hasher.update(subAddrName.value);
+			const mac = hasher.digest();
+			const offset = mac[mac.length - 1] & 0xf;
+			const reduced_mac = mac.slice(offset, offset + 5);
+			const code = base32Encode(reduced_mac, 'RFC4648', { padding: false }).toLowerCase();
 			return `${account.localPart}${account.separator}${subAddrName.value}${account.separator}${code}@${account.domain}`;
 		}
 	}
-	return "";
+	return '';
 });
 
 const copyAddr = () => {

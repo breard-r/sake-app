@@ -1,6 +1,6 @@
 {
   "name": "sake-app",
-  "version": "0.1.0-dev",
+  "version": "0.1.0",
   "author": "Rodolphe Bréard <rodolphe@what.tf>",
   "license": "(MIT OR Apache-2.0)",
   "private": true,

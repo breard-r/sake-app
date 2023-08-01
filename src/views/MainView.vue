@@ -5,6 +5,8 @@ import { useStorage } from '@vueuse/core'
 import { hmac } from '@noble/hashes/hmac';
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
+import LayoutComponent from '../components/LayoutComponent.vue';
+import NavBarComponent from '../components/NavBarComponent.vue';
 
 const router = useRouter();
 const accounts = useStorage('sake-accounts', []);
@@ -52,36 +54,36 @@ const copyAddr = () => {
 </script>
 
 <template>
-	<h1 class="title is-1">New email address</h1>
-	<label class="label" for="account-name">Account</label>
-	<div class="field has-addons">
-		<div class="control is-expanded">
-			<div class="select is-fullwidth">
-				<select id="account-name" v-model="selectedAccountId">
-					<option v-for="account in accounts" :key="account.id" :value="account.id">{{ account.localPart }}@{{ account.domain }}</option>
-				</select>
+	<NavBarComponent />
+	<LayoutComponent>
+		<h1 class="title is-1">New address</h1>
+		<label class="label" for="account-name">Account</label>
+		<div class="field has-addons">
+			<div class="control is-expanded">
+				<div class="select is-fullwidth">
+					<select id="account-name" v-model="selectedAccountId">
+						<option v-for="account in accounts" :key="account.id" :value="account.id">{{ account.localPart }}@{{ account.domain }}</option>
+					</select>
+				</div>
+			</div>
+			<p class="control">
+				<a class="button is-danger" @click="deleteAccount">Delete</a>
+			</p>
+		</div>
+		<div class="field">
+			<label class="label" for="sub-addr-name">Name</label>
+			<div class="control">
+				<input class="input" type="text" id="sub-addr-name" placeholder="Text input" v-model="subAddrName">
 			</div>
 		</div>
-		<p class="control">
-			<a class="button is-danger" @click="deleteAccount">Delete</a>
-		</p>
-		<p class="control">
-			<RouterLink to="/add-account" class="button is-primary">New</RouterLink>
-		</p>
-	</div>
-	<div class="field">
-		<label class="label" for="sub-addr-name">Name</label>
-		<div class="control">
-			<input class="input" type="text" id="sub-addr-name" placeholder="Text input" v-model="subAddrName">
+		<div class="field">
+			<label class="label" for="generated-addr">Address</label>
+			<div class="control">
+				<input class="input" type="text" id="generated-addr" v-model="generatedAddr" disabled>
+			</div>
 		</div>
-	</div>
-	<div class="field">
-		<label class="label" for="generated-addr">Address</label>
-		<div class="control">
-			<input class="input" type="text" id="generated-addr" v-model="generatedAddr" disabled>
+		<div class="buttons is-centered">
+			<button class="button is-primary" @click="copyAddr">Copy</button>
 		</div>
-	</div>
-	<div class="buttons is-centered">
-		<button class="button is-primary" @click="copyAddr">Copy</button>
-	</div>
+	</LayoutComponent>
 </template>

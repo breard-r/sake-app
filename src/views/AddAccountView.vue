@@ -5,6 +5,7 @@ import { useStorage } from '@vueuse/core'
 import { QrcodeStream } from 'vue-qrcode-reader'
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
+import LayoutComponent from '../components/LayoutComponent.vue';
 
 const accounts = useStorage('sake-accounts', []);
 const router = useRouter();
@@ -88,42 +89,44 @@ const resetErrorMessage = () => {
 </script>
 
 <template>
-	<h1 class="title is-1">Add a new account</h1>
-	<div class="notification is-danger is-light" v-if="errorMessage">
-		<button class="delete" @click="resetErrorMessage"></button>
-		{{ errorMessage }}
-	</div>
-	<div class="container" id="new-account-error-msg-container"></div>
-	<div class="field">
-		<label class="label" for="new-addr-local-part">Local part</label>
-		<div class="control">
-			<input class="input" type="text" id="new-addr-local-part" v-model="localPart">
+	<LayoutComponent>
+		<h1 class="title is-1">New account</h1>
+		<div class="notification is-danger is-light" v-if="errorMessage">
+			<button class="delete" @click="resetErrorMessage"></button>
+			{{ errorMessage }}
 		</div>
-	</div>
-	<div class="field">
-		<label class="label" for="new-addr-separator">Separator</label>
-		<div class="control">
-			<input class="input" type="text" id="new-addr-separator" v-model="separator">
+		<div class="container" id="new-account-error-msg-container"></div>
+		<div class="field">
+			<label class="label" for="new-addr-local-part">Local part</label>
+			<div class="control">
+				<input class="input" type="text" id="new-addr-local-part" v-model="localPart">
+			</div>
 		</div>
-	</div>
-	<div class="field">
-		<label class="label" for="new-addr-domain">Domain name</label>
-		<div class="control">
-			<input class="input" type="text" id="new-addr-domain" placeholder="example.org" v-model="domainName">
+		<div class="field">
+			<label class="label" for="new-addr-separator">Separator</label>
+			<div class="control">
+				<input class="input" type="text" id="new-addr-separator" v-model="separator">
+			</div>
 		</div>
-	</div>
-	<label class="label" for="new-addr-key">Private key</label>
-	<div class="field has-addons">
-		<div class="control is-expanded">
-			<input class="input" type="text" id="new-addr-key" v-model="privateKey">
+		<div class="field">
+			<label class="label" for="new-addr-domain">Domain name</label>
+			<div class="control">
+				<input class="input" type="text" id="new-addr-domain" placeholder="example.org" v-model="domainName">
+			</div>
 		</div>
-		<p class="control">
-			<a class="button is-primary" @click="showQrCodeScanner">Scan</a>
-		</p>
-	</div>
-	<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected"></qrcode-stream>
-	<div class="buttons is-centered">
-		<button class="button is-primary" :disabled="addDisabled" @click="addAccount">Add account</button>
-		<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">Cancel</button>
-	</div>
+		<label class="label" for="new-addr-key">Private key</label>
+		<div class="field has-addons">
+			<div class="control is-expanded">
+				<input class="input" type="text" id="new-addr-key" v-model="privateKey">
+			</div>
+			<p class="control">
+				<a class="button is-primary" @click="showQrCodeScanner">Scan</a>
+			</p>
+		</div>
+		<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected"></qrcode-stream>
+		<div class="buttons is-centered">
+			<button class="button is-primary" :disabled="addDisabled" @click="addAccount">Add account</button>
+			<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">Cancel</button>
+		</div>
+	</LayoutComponent>
 </template>

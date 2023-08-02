@@ -5,8 +5,14 @@ import MainView from '../views/MainView.vue';
 import AboutView from '../views/AboutView.vue';
 import AddAccountView from '../views/AddAccountView.vue';
 import DeleteAccountView from '../views/DeleteAccountView.vue';
+import ManageAccountsView from '../views/ManageAccountsView.vue';
 
 const accounts = useStorage('sake-accounts', []);
+const requireAccounts = () => {
+	if (!accounts.value.length) {
+		return '/add-account';
+	}
+};
 const router = createRouter({
 	history: createMemoryHistory(),
 	routes: [
@@ -14,11 +20,7 @@ const router = createRouter({
 			path: '/',
 			name: 'main',
 			component: MainView,
-			beforeEnter: (to, from) => {
-				if (!accounts.value.length) {
-					return '/add-account';
-				}
-			}
+			beforeEnter: requireAccounts
 		},
 		{
 			path: '/about',
@@ -34,6 +36,12 @@ const router = createRouter({
 			path: '/delete-account/:id',
 			name: 'delete-account',
 			component: DeleteAccountView,
+		},
+		{
+			path: '/manage-accounts',
+			name: 'manage-accounts',
+			component: ManageAccountsView,
+			beforeEnter: requireAccounts
 		},
 	]
 });

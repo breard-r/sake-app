@@ -1,4 +1,5 @@
 <script setup>
+import { sortAccounts } from '../accounts';
 import { ref, computed } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core'
@@ -9,12 +10,7 @@ import LayoutComponent from '../components/LayoutComponent.vue';
 import NavBarComponent from '../components/NavBarComponent.vue';
 
 const router = useRouter();
-const accounts = useStorage('sake-accounts', []);
-accounts.value.sort((a, b) => {
-	const va = `${a.localPart}@${a.domain}`;
-	const vb = `${b.localPart}@${b.domain}`;
-	return va.localeCompare(vb);
-});
+const accounts = sortAccounts(useStorage('sake-accounts', []));
 const selectedAccountId = ref(accounts.value[0].id);
 const subAddrName = ref('');
 
@@ -45,9 +41,6 @@ const generatedAddr = computed(() => {
 	}
 	return '';
 });
-const deleteAccount = () => {
-	return router.push(`/delete-account/${selectedAccountId.value}`);
-};
 const copyAddr = () => {
 	navigator.clipboard.writeText(generatedAddr.value);
 };
@@ -57,18 +50,15 @@ const copyAddr = () => {
 	<NavBarComponent />
 	<LayoutComponent>
 		<h1 class="title is-1">New address</h1>
-		<label class="label" for="account-name">Account</label>
-		<div class="field has-addons">
-			<div class="control is-expanded">
+		<div class="field">
+			<label class="label" for="account-name">Account</label>
+			<div class="control">
 				<div class="select is-fullwidth">
 					<select id="account-name" v-model="selectedAccountId">
 						<option v-for="account in accounts" :key="account.id" :value="account.id">{{ account.localPart }}@{{ account.domain }}</option>
 					</select>
 				</div>
 			</div>
-			<p class="control">
-				<a class="button is-danger" @click="deleteAccount">Delete</a>
-			</p>
 		</div>
 		<div class="field">
 			<label class="label" for="sub-addr-name">Name</label>

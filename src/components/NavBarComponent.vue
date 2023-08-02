@@ -23,6 +23,7 @@ const toggleBurger = () => {
 					<div class="navbar-menu" :class="{ 'is-active': menuActive }">
 						<div class="navbar-end">
 							<RouterLink to="/add-account" class="navbar-item">New account</RouterLink>
+							<RouterLink to="/about" class="navbar-item">About</RouterLink>
 						</div>
 					</div>
 				</nav>

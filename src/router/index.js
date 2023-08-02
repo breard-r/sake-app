@@ -2,6 +2,7 @@ import {createRouter, createMemoryHistory} from 'vue-router';
 import { useStorage } from '@vueuse/core'
 
 import MainView from '../views/MainView.vue';
+import AboutView from '../views/AboutView.vue';
 import AddAccountView from '../views/AddAccountView.vue';
 import DeleteAccountView from '../views/DeleteAccountView.vue';
 
@@ -18,6 +19,11 @@ const router = createRouter({
 					return '/add-account';
 				}
 			}
+		},
+		{
+			path: '/about',
+			name: 'about',
+			component: AboutView
 		},
 		{
 			path: '/add-account',

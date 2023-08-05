@@ -17,7 +17,7 @@ const toMainView = () => {
 <template>
 	<LayoutComponent>
 		<h1 class="title is-1">About</h1>
-		<h4 class="title is-4">Sub-Address KEy (SAKE) app</h4>
+		<h4 class="subtitle is-4">Sub-Address KEy (SAKE) app</h4>
 		<div class="block">
 			<p>Version {{ version }}</p>
 			<p>

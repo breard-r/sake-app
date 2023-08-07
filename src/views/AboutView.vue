@@ -19,10 +19,10 @@ const toMainView = () => {
 		<h1 class="title is-1">{{ $t("about.title") }}</h1>
 		<h4 class="subtitle is-4">{{ $t("about.name") }}</h4>
 		<div class="block">
-			<i18n-t keypath="about.version" tag="p">
+			<i18n-t scope="global" keypath="about.version" tag="p">
 				<template v-slot:version>{{ version }}</template>
 			</i18n-t>
-			<i18n-t keypath="about.license" tag="p">
+			<i18n-t scope="global" keypath="about.license" tag="p">
 				<template v-slot:mit>
 					<ExternalLinkComponent :url="mitLicenseUrl" name="MIT" />
 				</template>
@@ -30,7 +30,7 @@ const toMainView = () => {
 					<ExternalLinkComponent :url="apacheLicenseUrl" name="Apache 2.0" />
 				</template>
 			</i18n-t>
-			<i18n-t keypath="about.repository" tag="p">
+			<i18n-t scope="global" keypath="about.repository" tag="p">
 				<template v-slot:url>
 					<ExternalLinkComponent :url="repoUrl" :name="repoUrl" />
 				</template>

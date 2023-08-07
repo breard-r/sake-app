@@ -4,6 +4,7 @@ import { useStorage } from '@vueuse/core'
 import MainView from '../views/MainView.vue';
 import AboutView from '../views/AboutView.vue';
 import AddAccountView from '../views/AddAccountView.vue';
+import ConfigView from '../views/ConfigView.vue';
 import DeleteAccountView from '../views/DeleteAccountView.vue';
 import ManageAccountsView from '../views/ManageAccountsView.vue';
 
@@ -31,6 +32,11 @@ const router = createRouter({
 			path: '/add-account',
 			name: 'add-account',
 			component: AddAccountView
+		},
+		{
+			path: '/config',
+			name: 'config',
+			component: ConfigView,
 		},
 		{
 			path: '/delete-account/:id',

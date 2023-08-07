@@ -24,6 +24,7 @@ const toggleBurger = () => {
 						<div class="navbar-end">
 							<RouterLink to="/add-account" class="navbar-item">{{ $t("navbar.addAccount") }}</RouterLink>
 							<RouterLink to="/manage-accounts" class="navbar-item">{{ $t("navbar.manageAccounts") }}</RouterLink>
+							<RouterLink to="/config" class="navbar-item">{{ $t("navbar.config") }}</RouterLink>
 							<RouterLink to="/about" class="navbar-item">{{ $t("navbar.about") }}</RouterLink>
 						</div>
 					</div>

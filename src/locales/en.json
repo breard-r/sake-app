@@ -1,4 +1,5 @@
 {
+	"locale_name": "English",
 	"invariants": {
 		"controls": {
 			"cancel": "Cancel",
@@ -10,6 +11,7 @@
 	"navbar": {
 		"addAccount": "New account",
 		"manageAccounts": "Accounts",
+		"config": "Preferences",
 		"about": "About"
 	},
 	"about": {
@@ -40,6 +42,11 @@
 			"cameraStreamApiNotSupported": "Stream API is not supported in this browser.",
 			"unknown": "Unknown error."
 		}
+	},
+	"config": {
+		"title": "Preferences",
+		"language": "Language",
+		"close": "@:invariants.controls.close"
 	},
 	"deleteAccount": {
 		"title": "Delete account",

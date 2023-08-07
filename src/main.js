@@ -7,6 +7,7 @@ import App from './App.vue';
 import router from './router';
 
 import msg_en from './locales/en.json';
+import msg_fr from './locales/fr.json';
 
 const default_locale = 'en'
 const stored_locale = useStorage('sake-locale', '');
@@ -16,6 +17,7 @@ if (!stored_locale.value) {
 
 const messages = {
 	en: msg_en,
+	fr: msg_fr,
 };
 const i18n = createI18n({
 	locale: stored_locale.value,

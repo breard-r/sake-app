@@ -1,0 +1,71 @@
+{
+	"locale_name": "Français",
+	"invariants": {
+		"controls": {
+			"cancel": "Annuler",
+			"close": "Fermer",
+			"copy": "Copier",
+			"delete": "Supprimer"
+		}
+	},
+	"navbar": {
+		"addAccount": "Nouveau compte",
+		"manageAccounts": "Comptes",
+		"config": "Préférences",
+		"about": "À propos"
+	},
+	"about": {
+		"title": "À propos",
+		"name": "Sub-Address KEy (SAKE) app",
+		"version": "Version : {version}",
+		"license": "Licence : {mit} ou {apache}",
+		"repository": "Dépôt : {url}",
+		"close": "@:invariants.controls.close"
+	},
+	"addAccount": {
+		"title": "Nouveau compte",
+		"localPart": "Partie locale",
+		"separator": "Séparateur",
+		"domainName": "Nom de domaine",
+		"privateKey": "Clé privée",
+		"scan": "Scanner",
+		"addAccount": "Ajouter",
+		"cancel": "@:invariants.controls.cancel",
+		"error": {
+			"invalidBase64": "La clé doit être une chaîne de caractère en base64.",
+			"invalidSeparator": "La séparateur doit être un unique caractère.",
+			"cameraNotAllowed": "L'accès à la caméra n'a pas été autorisé.",
+			"cameraNotFound": "Aucune caméra détectée.",
+			"cameraInsecureContext": "Impossible d'accéder à la caméra depuis une liaison non-sécurisée.",
+			"cameraNotReadable": "Caméra inaccessible (potentiellement déjà utilisée).",
+			"cameraOverconstrained": "Les caméras détectées ne sont pas compatibles.",
+			"cameraStreamApiNotSupported": "L'API du flux de données vidéo n'est pas supportée par ce navigateur.",
+			"unknown": "Erreur inconnue."
+		}
+	},
+	"config": {
+		"title": "Préférences",
+		"language": "Langue",
+		"close": "@:invariants.controls.close"
+	},
+	"deleteAccount": {
+		"title": "Supprimer le compte",
+		"account": "Vous êtes sur le point de supprimer le compte suivant :",
+		"confirm": "Souhaitez-vous vraiment continuer ?",
+		"delete": "@:invariants.controls.delete",
+		"cancel": "@:invariants.controls.cancel"
+	},
+	"main": {
+		"title": "Nouvelle adresse",
+		"account": "Compte",
+		"name": "Nom",
+		"input": "Nom dédié",
+		"address": "Adresse",
+		"copy": "@:invariants.controls.copy"
+	},
+	"manageAccounts": {
+		"title": "Comptes",
+		"delete": "@:invariants.controls.delete",
+		"close": "@:invariants.controls.close"
+	}
+}

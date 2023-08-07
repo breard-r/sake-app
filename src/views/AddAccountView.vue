@@ -73,6 +73,26 @@ const onQrCodeDetected = (result_list) => {
 		scanQrCode.value = false;
 	}
 };
+const onQrCodeError = (err) => {
+	var message = '';
+	if (err.name === 'NotAllowedError') {
+		message = 'Camera access permission was not granted.'
+	} else if (err.name === 'NotFoundError') {
+		message = 'No camera detected'
+	} else if (err.name === 'NotSupportedError' || err.name === 'InsecureContextError') {
+		message = 'Unable to access the camera through an insecure channel.'
+	} else if (err.name === 'NotReadableError') {
+		message = 'Camera not accessible (potentially already in use).'
+	} else if (err.name === 'OverconstrainedError') {
+		message = 'Installed cameras are not suitable.'
+	} else if (err.name === 'StreamApiNotSupportedError') {
+		message = 'Stream API is not supported in this browser.'
+	} else {
+		message = `${err.name}: ${err.value}`;
+	}
+	console.log(message);
+	errorMessage.value = message;
+};
 
 // Cancel button
 const cancellDisabled = computed(() => {
@@ -123,7 +143,7 @@ const resetErrorMessage = () => {
 				<a class="button is-primary" @click="showQrCodeScanner">Scan</a>
 			</p>
 		</div>
-		<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected"></qrcode-stream>
+		<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected" @error="onQrCodeError"></qrcode-stream>
 		<div class="buttons is-centered">
 			<button class="button is-primary" :disabled="addDisabled" @click="addAccount">Add account</button>
 			<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">Cancel</button>

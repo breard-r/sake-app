@@ -26,7 +26,7 @@ watch(locale, async (newLocale) => {
 			<div class="control">
 				<div class="select is-fullwidth">
 					<select id="app-language" v-model="$i18n.locale">
-						<option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ $t("locale_name", locale) }}</option>
+						<option v-for="locale_id in $i18n.availableLocales" :key="`locale-${locale_id}`" :value="locale_id">{{ $t("locale_name", 1, { locale: locale_id}) }}</option>
 					</select>
 				</div>
 			</div>

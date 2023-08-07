@@ -1,0 +1,64 @@
+{
+	"invariants": {
+		"controls": {
+			"cancel": "Cancel",
+			"close": "Close",
+			"copy": "Copy",
+			"delete": "Delete"
+		}
+	},
+	"navbar": {
+		"addAccount": "New account",
+		"manageAccounts": "Accounts",
+		"about": "About"
+	},
+	"about": {
+		"title": "About",
+		"name": "Sub-Address KEy (SAKE) app",
+		"version": "Version: {version}",
+		"license": "License: {mit} or {apache}",
+		"repository": "Repository: {url}",
+		"close": "@:invariants.controls.close"
+	},
+	"addAccount": {
+		"title": "New account",
+		"localPart": "Local part",
+		"separator": "Separator",
+		"domainName": "Domain name",
+		"privateKey": "Private key",
+		"scan": "Scan",
+		"addAccount": "Add account",
+		"cancel": "@:invariants.controls.cancel",
+		"error": {
+			"invalidBase64": "The key must be a valid base64 string.",
+			"invalidSeparator": "The separator must be a single character.",
+			"cameraNotAllowed": "Camera access permission was not granted.",
+			"cameraNotFound": "No camera detected.",
+			"cameraInsecureContext": "Unable to access the camera through an insecure channel.",
+			"cameraNotReadable": "Camera not accessible (potentially already in use).",
+			"cameraOverconstrained": "Installed cameras are not suitable.",
+			"cameraStreamApiNotSupported": "Stream API is not supported in this browser.",
+			"unknown": "Unknown error."
+		}
+	},
+	"deleteAccount": {
+		"title": "Delete account",
+		"account": "You are about to delete the following account:",
+		"confirm": "Are you sure?",
+		"delete": "@:invariants.controls.delete",
+		"cancel": "@:invariants.controls.cancel"
+	},
+	"main": {
+		"title": "New address",
+		"account": "Account",
+		"name": "Name",
+		"input": "Dedicated name",
+		"address": "Address",
+		"copy": "@:invariants.controls.copy"
+	},
+	"manageAccounts": {
+		"title": "Accounts",
+		"delete": "@:invariants.controls.delete",
+		"close": "@:invariants.controls.close"
+	}
+}

@@ -16,20 +16,29 @@ const toMainView = () => {
 
 <template>
 	<LayoutComponent>
-		<h1 class="title is-1">About</h1>
-		<h4 class="subtitle is-4">Sub-Address KEy (SAKE) app</h4>
+		<h1 class="title is-1">{{ $t("about.title") }}</h1>
+		<h4 class="subtitle is-4">{{ $t("about.name") }}</h4>
 		<div class="block">
-			<p>Version {{ version }}</p>
-			<p>
-				License: <ExternalLinkComponent :url="mitLicenseUrl" name="MIT" /> or <ExternalLinkComponent :url="apacheLicenseUrl" name="Apache 2.0" />
-			</p>
-			<p>
-				Repository: <ExternalLinkComponent :url="repoUrl" :name="repoUrl" />
-			</p>
+			<i18n-t keypath="about.version" tag="p">
+				<template v-slot:version>{{ version }}</template>
+			</i18n-t>
+			<i18n-t keypath="about.license" tag="p">
+				<template v-slot:mit>
+					<ExternalLinkComponent :url="mitLicenseUrl" name="MIT" />
+				</template>
+				<template v-slot:apache>
+					<ExternalLinkComponent :url="apacheLicenseUrl" name="Apache 2.0" />
+				</template>
+			</i18n-t>
+			<i18n-t keypath="about.repository" tag="p">
+				<template v-slot:url>
+					<ExternalLinkComponent :url="repoUrl" :name="repoUrl" />
+				</template>
+			</i18n-t>
 		</div>
 		<div class="block">
 			<div class="buttons is-centered">
-				<button class="button is-light" @click="toMainView">Close</button>
+				<button class="button is-light" @click="toMainView">{{ $t("about.close") }}</button>
 			</div>
 		</div>
 	</LayoutComponent>

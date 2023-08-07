@@ -22,9 +22,9 @@ const toggleBurger = () => {
 					</div>
 					<div class="navbar-menu" :class="{ 'is-active': menuActive }">
 						<div class="navbar-end">
-							<RouterLink to="/add-account" class="navbar-item">New account</RouterLink>
-							<RouterLink to="/manage-accounts" class="navbar-item">Accounts</RouterLink>
-							<RouterLink to="/about" class="navbar-item">About</RouterLink>
+							<RouterLink to="/add-account" class="navbar-item">{{ $t("navbar.addAccount") }}</RouterLink>
+							<RouterLink to="/manage-accounts" class="navbar-item">{{ $t("navbar.manageAccounts") }}</RouterLink>
+							<RouterLink to="/about" class="navbar-item">{{ $t("navbar.about") }}</RouterLink>
 						</div>
 					</div>
 				</nav>

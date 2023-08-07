@@ -49,9 +49,9 @@ const copyAddr = () => {
 <template>
 	<NavBarComponent />
 	<LayoutComponent>
-		<h1 class="title is-1">New address</h1>
+		<h1 class="title is-1">{{ $t("main.title") }}</h1>
 		<div class="field">
-			<label class="label" for="account-name">Account</label>
+			<label class="label" for="account-name">{{ $t("main.account") }}</label>
 			<div class="control">
 				<div class="select is-fullwidth">
 					<select id="account-name" v-model="selectedAccountId">
@@ -61,19 +61,19 @@ const copyAddr = () => {
 			</div>
 		</div>
 		<div class="field">
-			<label class="label" for="sub-addr-name">Name</label>
+			<label class="label" for="sub-addr-name">{{ $t("main.name") }}</label>
 			<div class="control">
-				<input class="input" type="text" id="sub-addr-name" placeholder="Text input" v-model="subAddrName">
+				<input class="input" type="text" id="sub-addr-name" :placeholder="$t('main.input')" v-model="subAddrName">
 			</div>
 		</div>
 		<div class="field">
-			<label class="label" for="generated-addr">Address</label>
+			<label class="label" for="generated-addr">{{ $t("main.address") }}</label>
 			<div class="control">
 				<input class="input" type="text" id="generated-addr" v-model="generatedAddr" disabled>
 			</div>
 		</div>
 		<div class="buttons is-centered">
-			<button class="button is-primary" @click="copyAddr">Copy</button>
+			<button class="button is-primary" @click="copyAddr">{{ $t("main.copy") }}</button>
 		</div>
 	</LayoutComponent>
 </template>

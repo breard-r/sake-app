@@ -13,7 +13,7 @@ const localPart = ref('');
 const separator = ref('+');
 const domainName = ref('');
 const privateKey = ref('');
-const errorMessage = ref('');
+const errorMessageId = ref('');
 
 const base64Decode = (str_b64) => {
 	try {
@@ -25,7 +25,7 @@ const base64Decode = (str_b64) => {
 		}
 		return b;
 	} catch (e) {
-		throw new Error('The key must be a valid base64 string.');
+		throw new Error('addAccount.error.invalidBase64');
 	}
 };
 
@@ -43,7 +43,7 @@ const addAccount = () => {
 	if (!addDisabled.value) {
 		try {
 			if (separator.value.length != 1) {
-				throw new Error('The separator must be a single character.');
+				throw new Error('addAccount.error.invalidSeparator');
 			}
 			const key = base64Decode(privateKey.value);
 			const hash = sha256(`${localPart.value}@${domainName.value}`);
@@ -57,7 +57,7 @@ const addAccount = () => {
 			accounts.value.push(newAccount);
 			return toMainView();
 		} catch (e) {
-			errorMessage.value = e.message;
+			errorMessageId.value = e.message;
 		}
 	}
 };
@@ -74,24 +74,22 @@ const onQrCodeDetected = (result_list) => {
 	}
 };
 const onQrCodeError = (err) => {
-	var message = '';
 	if (err.name === 'NotAllowedError') {
-		message = 'Camera access permission was not granted.'
+		setErrorMessage('addAccount.error.cameraNotAllowed');
 	} else if (err.name === 'NotFoundError') {
-		message = 'No camera detected'
+		setErrorMessage('addAccount.error.cameraNotFound');
 	} else if (err.name === 'NotSupportedError' || err.name === 'InsecureContextError') {
-		message = 'Unable to access the camera through an insecure channel.'
+		setErrorMessage('addAccount.error.cameraInsecureContext');
 	} else if (err.name === 'NotReadableError') {
-		message = 'Camera not accessible (potentially already in use).'
+		setErrorMessage('addAccount.error.cameraNotReadable');
 	} else if (err.name === 'OverconstrainedError') {
-		message = 'Installed cameras are not suitable.'
+		setErrorMessage('addAccount.error.cameraOverconstrained');
 	} else if (err.name === 'StreamApiNotSupportedError') {
-		message = 'Stream API is not supported in this browser.'
+		setErrorMessage('addAccount.error.cameraStreamApiNotSupported');
 	} else {
-		message = `${err.name}: ${err.value}`;
+		setErrorMessage('addAccount.error.unknown');
+		console.log(`${err.name}: ${err.value}`);
 	}
-	console.log(message);
-	errorMessage.value = message;
 };
 
 // Cancel button
@@ -103,50 +101,57 @@ const toMainView = () => {
 };
 
 // Error message
+const setErrorMessage = (messageId) => {
+	if (messageId.startsWith('addAccount.error.')) {
+		errorMessageId.value = messageId;
+	} else {
+		errorMessageId.value = 'addAccount.error.unknown';
+	}
+};
 const resetErrorMessage = () => {
-	errorMessage.value = '';
+	errorMessageId.value = '';
 };
 </script>
 
 <template>
 	<LayoutComponent>
-		<h1 class="title is-1">New account</h1>
-		<div class="notification is-danger is-light" v-if="errorMessage">
+		<h1 class="title is-1">{{ $t("addAccount.title") }}</h1>
+		<div class="notification is-danger is-light" v-if="errorMessageId">
 			<button class="delete" @click="resetErrorMessage"></button>
-			{{ errorMessage }}
+			{{ $t(errorMessageId) }}
 		</div>
 		<div class="container" id="new-account-error-msg-container"></div>
 		<div class="field">
-			<label class="label" for="new-addr-local-part">Local part</label>
+			<label class="label" for="new-addr-local-part">{{ $t("addAccount.localPart") }}</label>
 			<div class="control">
 				<input class="input" type="text" id="new-addr-local-part" v-model="localPart">
 			</div>
 		</div>
 		<div class="field">
-			<label class="label" for="new-addr-separator">Separator</label>
+			<label class="label" for="new-addr-separator">{{ $t("addAccount.separator") }}</label>
 			<div class="control">
 				<input class="input" type="text" id="new-addr-separator" v-model="separator">
 			</div>
 		</div>
 		<div class="field">
-			<label class="label" for="new-addr-domain">Domain name</label>
+			<label class="label" for="new-addr-domain">{{ $t("addAccount.domainName") }}</label>
 			<div class="control">
 				<input class="input" type="text" id="new-addr-domain" placeholder="example.org" v-model="domainName">
 			</div>
 		</div>
-		<label class="label" for="new-addr-key">Private key</label>
+		<label class="label" for="new-addr-key">{{ $t("addAccount.privateKey") }}</label>
 		<div class="field has-addons">
 			<div class="control is-expanded">
 				<input class="input" type="text" id="new-addr-key" v-model="privateKey">
 			</div>
 			<p class="control">
-				<a class="button is-primary" @click="showQrCodeScanner">Scan</a>
+				<a class="button is-primary" @click="showQrCodeScanner">{{ $t("addAccount.scan") }}</a>
 			</p>
 		</div>
 		<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected" @error="onQrCodeError"></qrcode-stream>
 		<div class="buttons is-centered">
-			<button class="button is-primary" :disabled="addDisabled" @click="addAccount">Add account</button>
-			<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">Cancel</button>
+			<button class="button is-primary" :disabled="addDisabled" @click="addAccount">{{ $t("addAccount.addAccount") }}</button>
+			<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">{{ $t("addAccount.cancel") }}</button>
 		</div>
 	</LayoutComponent>
 </template>

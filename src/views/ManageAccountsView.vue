@@ -17,7 +17,7 @@ const toMainView = () => {
 
 <template>
 	<LayoutComponent>
-		<h1 class="title is-1">Accounts</h1>
+		<h1 class="title is-1">{{ $t("manageAccounts.title") }}</h1>
 		<div class="block">
 			<table class="table is-fullwidth">
 				<tbody>
@@ -26,7 +26,7 @@ const toMainView = () => {
 							{{ account.localPart }}@{{ account.domain }}
 						</th>
 						<th>
-							<button class="button is-danger" @click="deleteAccount(account.id)">Delete</button>
+							<button class="button is-danger" @click="deleteAccount(account.id)">{{ $t("manageAccounts.delete") }}</button>
 						</th>
 					</tr>
 				</tbody>
@@ -34,7 +34,7 @@ const toMainView = () => {
 		</div>
 		<div class="block">
 			<div class="buttons is-centered">
-				<button class="button is-light" @click="toMainView">Close</button>
+				<button class="button is-light" @click="toMainView">{{ $t("manageAccounts.close") }}</button>
 			</div>
 		</div>
 	</LayoutComponent>

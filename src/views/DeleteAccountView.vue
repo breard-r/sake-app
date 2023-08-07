@@ -19,13 +19,13 @@ const toMainView = () => {
 
 <template>
 	<LayoutComponent>
-		<h1 class="title is-1">Delete account</h1>
-		<p>You are about to delete the following account:</p>
+		<h1 class="title is-1">{{ $t("deleteAccount.title") }}</h1>
+		<p>{{ $t("deleteAccount.account") }}</p>
 		<p class="has-text-weight-semibold is-size-5">{{ account.localPart }}@{{ account.domain }}</p>
-		<p>Are you sure?</p>
+		<p>{{ $t("deleteAccount.confirm") }}</p>
 		<div class="buttons is-centered">
-			<button class="button is-danger" @click="deleteAccount">Delete</button>
-			<button class="button is-light" @click="toMainView">Cancel</button>
+			<button class="button is-danger" @click="deleteAccount">{{ $t("deleteAccount.delete") }}</button>
+			<button class="button is-light" @click="toMainView">{{ $t("deleteAccount.cancel") }}</button>
 		</div>
 	</LayoutComponent>
 </template>

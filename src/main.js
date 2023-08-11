@@ -20,6 +20,7 @@ const messages = {
 	fr: msg_fr,
 };
 const i18n = createI18n({
+	legacy: false,
 	locale: stored_locale.value,
 	fallbackLocale: default_locale,
 	messages,

@@ -19,6 +19,8 @@
 		"name": "Sub-Address KEy (SAKE) app",
 		"version": "Version : {version}",
 		"license": "Licence : {mit} ou {apache}",
+		"license_mit_url": "https://fr.wikipedia.org/wiki/Licence_MIT",
+		"license_apache_url": "https://fr.wikipedia.org/wiki/Licence_Apache",
 		"repository": "Dépôt : {url}",
 		"close": "@:invariants.controls.close"
 	},

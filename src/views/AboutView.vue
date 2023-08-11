@@ -5,8 +5,6 @@ import LayoutComponent from '../components/LayoutComponent.vue';
 import ExternalLinkComponent from '../components/ExternalLinkComponent.vue';
 
 const router = useRouter();
-const mitLicenseUrl = 'https://spdx.org/licenses/MIT.html';
-const apacheLicenseUrl = 'https://spdx.org/licenses/Apache-2.0.html';
 const repoUrl = 'https://github.com/breard-r/sake-app';
 
 const toMainView = () => {
@@ -24,10 +22,10 @@ const toMainView = () => {
 			</i18n-t>
 			<i18n-t scope="global" keypath="about.license" tag="p">
 				<template v-slot:mit>
-					<ExternalLinkComponent :url="mitLicenseUrl" name="MIT" />
+					<ExternalLinkComponent :url="$t('about.license_mit_url')" name="MIT" />
 				</template>
 				<template v-slot:apache>
-					<ExternalLinkComponent :url="apacheLicenseUrl" name="Apache 2.0" />
+					<ExternalLinkComponent :url="$t('about.license_apache_url')" name="Apache 2.0" />
 				</template>
 			</i18n-t>
 			<i18n-t scope="global" keypath="about.repository" tag="p">

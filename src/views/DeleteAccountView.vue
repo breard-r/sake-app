@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
-import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core';
 import LayoutComponent from '../components/LayoutComponent.vue';
 
 const accounts = useStorage('sake-accounts', []);

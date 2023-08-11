@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core';
 import { QrcodeStream, setZXingModuleOverrides } from 'vue-qrcode-reader';
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
@@ -36,7 +36,7 @@ const addDisabled = computed(() => {
 		localPart.value,
 		separator.value,
 		domainName.value,
-		privateKey.value
+		privateKey.value,
 	];
 	return !params.every((e) => e);
 });

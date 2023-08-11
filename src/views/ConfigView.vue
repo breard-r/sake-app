@@ -2,7 +2,7 @@
 import { watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core';
 import LayoutComponent from '../components/LayoutComponent.vue';
 
 const router = useRouter();

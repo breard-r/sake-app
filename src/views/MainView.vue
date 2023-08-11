@@ -2,7 +2,7 @@
 import { sortAccounts } from '../accounts';
 import { ref, computed } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core';
 import { hmac } from '@noble/hashes/hmac';
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';

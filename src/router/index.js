@@ -1,5 +1,5 @@
 import {createRouter, createMemoryHistory} from 'vue-router';
-import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core';
 
 import MainView from '../views/MainView.vue';
 import AboutView from '../views/AboutView.vue';
@@ -21,17 +21,17 @@ const router = createRouter({
 			path: '/',
 			name: 'main',
 			component: MainView,
-			beforeEnter: requireAccounts
+			beforeEnter: requireAccounts,
 		},
 		{
 			path: '/about',
 			name: 'about',
-			component: AboutView
+			component: AboutView,
 		},
 		{
 			path: '/add-account',
 			name: 'add-account',
-			component: AddAccountView
+			component: AddAccountView,
 		},
 		{
 			path: '/config',
@@ -47,7 +47,7 @@ const router = createRouter({
 			path: '/manage-accounts',
 			name: 'manage-accounts',
 			component: ManageAccountsView,
-			beforeEnter: requireAccounts
+			beforeEnter: requireAccounts,
 		},
 	]
 });

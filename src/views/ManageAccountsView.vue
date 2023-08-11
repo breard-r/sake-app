@@ -1,7 +1,7 @@
 <script setup>
 import { sortAccounts } from '../accounts';
 import { RouterLink, useRouter } from 'vue-router';
-import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core';
 import LayoutComponent from '../components/LayoutComponent.vue';
 
 const router = useRouter();

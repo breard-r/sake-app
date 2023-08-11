@@ -22,9 +22,11 @@ update_app_version()
 {
 	local new_version="$1"
 	local tmp_file="package.json.tmp"
+	local current_date=$(date "+%Y-%m-%d")
 
 	jq ".version = \"${new_version}\"" "package.json" >"${tmp_file}"
 	mv "${tmp_file}" "package.json"
+	sed -i "s/## \[Unreleased\]/## \[${new_version}\] - ${current_date}/" "CHANGELOG.md"
 }
 
 check_working_directory()

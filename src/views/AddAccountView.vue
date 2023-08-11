@@ -2,10 +2,11 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core'
-import { QrcodeStream } from 'vue-qrcode-reader'
+import { QrcodeStream, setZXingModuleOverrides } from 'vue-qrcode-reader';
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
 import LayoutComponent from '../components/LayoutComponent.vue';
+import wasmFile from "../../node_modules/@sec-ant/zxing-wasm/dist/reader/zxing_reader.wasm?url";
 
 const accounts = useStorage('sake-accounts', []);
 const router = useRouter();
@@ -63,6 +64,14 @@ const addAccount = () => {
 };
 
 // QR code reader
+setZXingModuleOverrides({
+	locateFile: (path, prefix) => {
+		if (path.endsWith(".wasm")) {
+			return wasmFile;
+		}
+		return prefix + path;
+	},
+});
 const scanQrCode = ref(false);
 const showQrCodeScanner = (data) => {
 	scanQrCode.value = true;

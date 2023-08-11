@@ -5,9 +5,7 @@ import { createI18n } from 'vue-i18n';
 import { useStorage } from '@vueuse/core';
 import App from './App.vue';
 import router from './router';
-
-import msg_en from './locales/en.json';
-import msg_fr from './locales/fr.json';
+import messages from '@intlify/unplugin-vue-i18n/messages';
 
 const default_locale = 'en';
 const stored_locale = useStorage('sake-locale', '');
@@ -15,10 +13,6 @@ if (!stored_locale.value) {
 	stored_locale.value = default_locale;
 }
 
-const messages = {
-	en: msg_en,
-	fr: msg_fr,
-};
 const i18n = createI18n({
 	legacy: false,
 	locale: stored_locale.value,

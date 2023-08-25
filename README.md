@@ -34,7 +34,7 @@ npm run build
 
 ## Can I use this app without self-hosting it?
 
-Unfortunately, although it would be ok, there is currently no known hosted version of this application. This should change in the future.
+Yes, you can use [https://sake.email/](https://sake.email/). This instance is kept up to date.
 
 ## Can I use this app completely offline?
 

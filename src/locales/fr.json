@@ -35,6 +35,7 @@
 		"cancel": "@:invariants.controls.cancel",
 		"error": {
 			"invalidBase64": "La clé doit être une chaîne de caractère en base64.",
+			"invalidKeyLength": "La longueur de la clé doit être de 128 bits (16 bytes) ou de 256 bits (32 bytes).",
 			"invalidSeparator": "La séparateur doit être un unique caractère.",
 			"cameraNotAllowed": "L'accès à la caméra n'a pas été autorisé.",
 			"cameraNotFound": "Aucune caméra détectée.",

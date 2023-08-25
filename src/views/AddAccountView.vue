@@ -15,6 +15,7 @@ const separator = ref('+');
 const domainName = ref('');
 const privateKey = ref('');
 const errorMessageId = ref('');
+const authorizedKeyLengths = [16, 32];
 
 const base64Decode = (str_b64) => {
 	try {
@@ -47,6 +48,9 @@ const addAccount = () => {
 				throw new Error('addAccount.error.invalidSeparator');
 			}
 			const key = base64Decode(privateKey.value);
+			if (!authorizedKeyLengths.includes(key.length)) {
+				throw new Error('addAccount.error.invalidKeyLength');
+			}
 			const hash = sha256(`${localPart.value}@${domainName.value}`);
 			const newAccount = {
 				id: base32Encode(hash, 'RFC4648', { padding: false }).toLowerCase(),

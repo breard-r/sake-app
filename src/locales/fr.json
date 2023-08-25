@@ -43,6 +43,7 @@
 			"cameraNotReadable": "Caméra inaccessible (potentiellement déjà utilisée).",
 			"cameraOverconstrained": "Les caméras détectées ne sont pas compatibles.",
 			"cameraStreamApiNotSupported": "L'API du flux de données vidéo n'est pas supportée par ce navigateur.",
+			"localPartSeparator": "La partie locale ne peut pas contenir le séparateur.",
 			"unknown": "Erreur inconnue."
 		}
 	},

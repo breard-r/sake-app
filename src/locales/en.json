@@ -43,6 +43,7 @@
 			"cameraNotReadable": "Camera not accessible (potentially already in use).",
 			"cameraOverconstrained": "Installed cameras are not suitable.",
 			"cameraStreamApiNotSupported": "Stream API is not supported in this browser.",
+			"localPartSeparator": "The local part cannot contain the separator.",
 			"unknown": "Unknown error."
 		}
 	},

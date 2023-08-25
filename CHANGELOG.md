@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Secret keys are now restricted to 128 bits (16 bytes) or 256 bits (32 bytes)
+- The local part cannot contain the separator
 
 ## [0.2.0] - 2023-08-11
 

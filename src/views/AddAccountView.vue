@@ -47,6 +47,9 @@ const addAccount = () => {
 			if (separator.value.length != 1) {
 				throw new Error('addAccount.error.invalidSeparator');
 			}
+			if (localPart.value.includes(separator.value)) {
+				throw new Error('addAccount.error.localPartSeparator');
+			}
 			const key = base64Decode(privateKey.value);
 			if (!authorizedKeyLengths.includes(key.length)) {
 				throw new Error('addAccount.error.invalidKeyLength');

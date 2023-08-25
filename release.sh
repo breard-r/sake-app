@@ -47,6 +47,8 @@ build_assets()
 
 	npm run --silent build >/dev/null
 	cp -r "dist" "${asset_dir}"
+	cp "LICENSE-APACHE-2.0.txt" "${asset_dir}"
+	cp "LICENSE-MIT.txt" "${asset_dir}"
 	rm -f "${asset_dir}/manifest.webmanifest" "${asset_dir}/sw.js"
 
 	tar czf "${asset_dir}.tar.gz" "${asset_dir}"

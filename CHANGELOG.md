@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - The main view now includes a reset button
+- An error message is now displayed if JavaScript is disabled
 
 ### Changed
 - Secret keys are now restricted to 128 bits (16 bytes) or 256 bits (32 bytes)

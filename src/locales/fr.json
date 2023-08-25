@@ -5,7 +5,8 @@
 			"cancel": "Annuler",
 			"close": "Fermer",
 			"copy": "Copier",
-			"delete": "Supprimer"
+			"delete": "Supprimer",
+			"reset": "Réinitialiser"
 		}
 	},
 	"navbar": {
@@ -65,7 +66,8 @@
 		"name": "Nom",
 		"input": "Nom dédié",
 		"address": "Adresse",
-		"copy": "@:invariants.controls.copy"
+		"copy": "@:invariants.controls.copy",
+		"reset": "@:invariants.controls.reset"
 	},
 	"manageAccounts": {
 		"title": "Comptes",

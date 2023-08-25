@@ -44,6 +44,9 @@ const generatedAddr = computed(() => {
 const copyAddr = () => {
 	navigator.clipboard.writeText(generatedAddr.value);
 };
+const resetForm = () => {
+	subAddrName.value = '';
+};
 </script>
 
 <template>
@@ -74,6 +77,7 @@ const copyAddr = () => {
 		</div>
 		<div class="buttons is-centered">
 			<button class="button is-primary" @click="copyAddr">{{ $t("main.copy") }}</button>
+			<button class="button is-light" @click="resetForm">{{ $t("main.reset") }}</button>
 		</div>
 	</LayoutComponent>
 </template>

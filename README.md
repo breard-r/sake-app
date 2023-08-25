@@ -2,6 +2,15 @@
 
 Web application that can be used to generate new sub-addresses as defined in the [Sub-Address KEy (SAKE) filter](https://github.com/breard-r/opensmtpd-filter-sake).
 
+## Install
+
+Download the build from [the latest released version](https://github.com/breard-r/sake-app/releases). Extract the archive and configure your web server to serve those files.
+
+That's it. The final build is plain HTML/CSS/JS with a few assets, therefore there is no back-end to configure.
+
+Alternatively, on ArchLinux you can install the [sake-app](https://aur.archlinux.org/packages/sake-app) package from the AUR. You will find the files in the `/usr/share/webapps/sake-app` directory.
+
+
 ## Project Setup
 
 ```sh

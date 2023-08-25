@@ -12,6 +12,7 @@ const stored_locale = useStorage('sake-locale', '');
 if (!stored_locale.value) {
 	stored_locale.value = default_locale;
 }
+document.documentElement.setAttribute('lang', stored_locale.value);
 
 const i18n = createI18n({
 	legacy: false,

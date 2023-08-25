@@ -15,6 +15,7 @@ const toMainView = () => {
 
 watch(locale, async (newLocale) => {
 	stored_locale.value = newLocale;
+	document.documentElement.setAttribute('lang', newLocale);
 });
 </script>
 

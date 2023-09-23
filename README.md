@@ -1,10 +1,10 @@
 # Sub-Address KEy (SAKE) app
 
-Web application that can be used to generate new sub-addresses as defined in the [Sub-Address KEy (SAKE) filter](https://github.com/breard-r/opensmtpd-filter-sake).
+Web application that can be used to generate new sub-addresses as defined in the [Sub-Address KEy (SAKE) filter](https://git.what.tf/rodolphe/opensmtpd-filter-sake).
 
 ## Install
 
-Download the build from [the latest released version](https://github.com/breard-r/sake-app/releases). Extract the archive and configure your web server to serve those files.
+Download the build from [the latest released version](https://git.what.tf/rodolphe/sake-app/releases). Extract the archive and configure your web server to serve those files.
 
 That's it. The final build is plain HTML/CSS/JS with a few assets, therefore there is no back-end to configure.
 

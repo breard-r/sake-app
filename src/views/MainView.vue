@@ -6,6 +6,7 @@ import { useStorage } from '@vueuse/core';
 import { hmac } from '@noble/hashes/hmac';
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
+import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
 import NavBarComponent from '../components/NavBarComponent.vue';
 
@@ -52,32 +53,28 @@ const resetForm = () => {
 <template>
 	<NavBarComponent />
 	<LayoutComponent>
-		<h1 class="title is-1">{{ $t("main.title") }}</h1>
-		<div class="field">
-			<label class="label" for="account-name">{{ $t("main.account") }}</label>
-			<div class="control">
-				<div class="select is-fullwidth">
-					<select id="account-name" v-model="selectedAccountId">
-						<option v-for="account in accounts" :key="account.id" :value="account.id">{{ account.localPart }}@{{ account.domain }}</option>
-					</select>
-				</div>
-			</div>
+		<h1>{{ $t("main.title") }}</h1>
+
+		<div class="mb-3">
+			<label class="form-label" for="account-name">{{ $t("main.account") }}</label>
+			<select class="form-select" id="account-name" v-model="selectedAccountId">
+				<option v-for="account in accounts" :key="account.id" :value="account.id">{{ account.localPart }}@{{ account.domain }}</option>
+			</select>
 		</div>
-		<div class="field">
-			<label class="label" for="sub-addr-name">{{ $t("main.name") }}</label>
-			<div class="control">
-				<input class="input" type="text" id="sub-addr-name" :placeholder="$t('main.input')" v-model="subAddrName">
-			</div>
+
+		<div class="mb-3">
+			<label class="form-label" for="sub-addr-name">{{ $t("main.name") }}</label>
+			<input class="form-control" type="text" id="sub-addr-name" :placeholder="$t('main.input')" v-model="subAddrName">
 		</div>
-		<div class="field">
-			<label class="label" for="generated-addr">{{ $t("main.address") }}</label>
-			<div class="control">
-				<input class="input" type="text" id="generated-addr" v-model="generatedAddr" disabled>
-			</div>
+
+		<div class="mb-3">
+			<label class="form-label" for="generated-addr">{{ $t("main.address") }}</label>
+			<input class="form-control" type="text" id="generated-addr" v-model="generatedAddr" disabled>
 		</div>
-		<div class="buttons is-centered">
-			<button class="button is-primary" @click="copyAddr">{{ $t("main.copy") }}</button>
-			<button class="button is-light" @click="resetForm">{{ $t("main.reset") }}</button>
-		</div>
+
+		<ButtonGroupComponent>
+			<button type="button" class="btn btn-primary" @click="copyAddr">{{ $t("main.copy") }}</button>
+			<button type="button" class="btn btn-secondary" @click="resetForm">{{ $t("main.reset") }}</button>
+		</ButtonGroupComponent>
 	</LayoutComponent>
 </template>

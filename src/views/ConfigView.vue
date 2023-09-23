@@ -3,6 +3,7 @@ import { watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useStorage } from '@vueuse/core';
+import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
 
 const router = useRouter();
@@ -21,19 +22,17 @@ watch(locale, async (newLocale) => {
 
 <template>
 	<LayoutComponent>
-		<h1 class="title is-1">{{ $t("config.title") }}</h1>
-		<div class="field">
-			<label class="label" for="app-language">{{ $t("config.language") }}</label>
-			<div class="control">
-				<div class="select is-fullwidth">
-					<select id="app-language" v-model="$i18n.locale">
-						<option v-for="locale_id in $i18n.availableLocales" :key="`locale-${locale_id}`" :value="locale_id">{{ $t("locale_name", 1, { locale: locale_id}) }}</option>
-					</select>
-				</div>
-			</div>
+		<h1>{{ $t("config.title") }}</h1>
+
+		<div class="mb-3">
+			<label class="form-label" for="app-language">{{ $t("config.language") }}</label>
+			<select class="form-select" id="app-language" v-model="$i18n.locale">
+				<option v-for="locale_id in $i18n.availableLocales" :key="`locale-${locale_id}`" :value="locale_id">{{ $t("locale_name", 1, { locale: locale_id}) }}</option>
+			</select>
 		</div>
-		<div class="buttons is-centered">
-			<button class="button is-light" @click="toMainView">{{ $t("config.close") }}</button>
-		</div>
+
+		<ButtonGroupComponent>
+			<button type="button" class="btn btn-secondary" @click="toMainView">{{ $t("about.close") }}</button>
+		</ButtonGroupComponent>
 	</LayoutComponent>
 </template>

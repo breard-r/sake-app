@@ -5,6 +5,7 @@ import { useStorage } from '@vueuse/core';
 import { QrcodeStream, setZXingModuleOverrides } from 'vue-qrcode-reader';
 import { sha256 } from '@noble/hashes/sha256';
 import base32Encode from 'base32-encode';
+import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
 import wasmFile from "../../node_modules/@sec-ant/zxing-wasm/dist/reader/zxing_reader.wasm?url";
 
@@ -131,43 +132,38 @@ const resetErrorMessage = () => {
 
 <template>
 	<LayoutComponent>
-		<h1 class="title is-1">{{ $t("addAccount.title") }}</h1>
-		<div class="notification is-danger is-light" v-if="errorMessageId">
-			<button class="delete" @click="resetErrorMessage"></button>
+		<h1>{{ $t("addAccount.title") }}</h1>
+
+		<div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="errorMessageId">
 			{{ $t(errorMessageId) }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click="resetErrorMessage"></button>
 		</div>
-		<div class="container" id="new-account-error-msg-container"></div>
-		<div class="field">
-			<label class="label" for="new-addr-local-part">{{ $t("addAccount.localPart") }}</label>
-			<div class="control">
-				<input class="input" type="text" id="new-addr-local-part" v-model="localPart">
+
+		<div class="mb-3">
+			<label class="form-label" for="new-addr-local-part">{{ $t("addAccount.localPart") }}</label>
+			<input class="form-control" type="text" id="new-addr-local-part" v-model="localPart">
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="new-addr-separator">{{ $t("addAccount.separator") }}</label>
+			<input class="form-control" type="text" id="new-addr-separator" v-model="separator">
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="new-addr-domain">{{ $t("addAccount.domainName") }}</label>
+			<input class="form-control" type="text" id="new-addr-domain" placeholder="example.org" v-model="domainName">
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="new-addr-key">{{ $t("addAccount.privateKey") }}</label>
+			<div class="input-group">
+				<input class="form-control" type="text" id="new-addr-key" v-model="privateKey">
+				<button class="btn btn-primary" type="button" @click="showQrCodeScanner">{{ $t("addAccount.scan") }}</button>
 			</div>
 		</div>
-		<div class="field">
-			<label class="label" for="new-addr-separator">{{ $t("addAccount.separator") }}</label>
-			<div class="control">
-				<input class="input" type="text" id="new-addr-separator" v-model="separator">
-			</div>
-		</div>
-		<div class="field">
-			<label class="label" for="new-addr-domain">{{ $t("addAccount.domainName") }}</label>
-			<div class="control">
-				<input class="input" type="text" id="new-addr-domain" placeholder="example.org" v-model="domainName">
-			</div>
-		</div>
-		<label class="label" for="new-addr-key">{{ $t("addAccount.privateKey") }}</label>
-		<div class="field has-addons">
-			<div class="control is-expanded">
-				<input class="input" type="text" id="new-addr-key" v-model="privateKey">
-			</div>
-			<p class="control">
-				<a class="button is-primary" @click="showQrCodeScanner">{{ $t("addAccount.scan") }}</a>
-			</p>
-		</div>
+
 		<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected" @error="onQrCodeError"></qrcode-stream>
-		<div class="buttons is-centered">
-			<button class="button is-primary" :disabled="addDisabled" @click="addAccount">{{ $t("addAccount.addAccount") }}</button>
-			<button class="button is-light" v-if="!cancellDisabled" @click="toMainView">{{ $t("addAccount.cancel") }}</button>
-		</div>
+
+		<ButtonGroupComponent>
+			<button type="button" class="btn btn-primary" :disabled="addDisabled" @click="addAccount">{{ $t("addAccount.addAccount") }}</button>
+			<button type="button" class="btn btn-secondary" v-if="!cancellDisabled" @click="toMainView">{{ $t("addAccount.cancel") }}</button>
+		</ButtonGroupComponent>
 	</LayoutComponent>
 </template>

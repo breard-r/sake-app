@@ -2,6 +2,7 @@
 import { sortAccounts } from '../accounts';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core';
+import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
 
 const router = useRouter();
@@ -17,25 +18,23 @@ const toMainView = () => {
 
 <template>
 	<LayoutComponent>
-		<h1 class="title is-1">{{ $t("manageAccounts.title") }}</h1>
-		<div class="block">
-			<table class="table is-fullwidth">
+		<h1>{{ $t("manageAccounts.title") }}</h1>
+
+		<table class="table">
 				<tbody>
 					<tr v-for="account in accounts">
-						<th class="has-text-right is-vcentered">
+						<th class="text-end align-middle">
 							{{ account.localPart }}@{{ account.domain }}
 						</th>
 						<th>
-							<button class="button is-danger" @click="deleteAccount(account.id)">{{ $t("manageAccounts.delete") }}</button>
+							<button type="button" class="btn btn-danger" @click="deleteAccount(account.id)">{{ $t("manageAccounts.delete") }}</button>
 						</th>
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		<div class="block">
-			<div class="buttons is-centered">
-				<button class="button is-light" @click="toMainView">{{ $t("manageAccounts.close") }}</button>
-			</div>
-		</div>
+
+		<ButtonGroupComponent>
+			<button type="button" class="btn btn-secondary" @click="toMainView">{{ $t("manageAccounts.close") }}</button>
+		</ButtonGroupComponent>
 	</LayoutComponent>
 </template>

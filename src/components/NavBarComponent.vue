@@ -1,35 +1,34 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-
-const menuActive = ref(false);
-const toggleBurger = () => {
-	menuActive.value = !menuActive.value;
-};
+import LayoutComponent from '../components/LayoutComponent.vue';
+import { Popover } from 'bootstrap';
 </script>
 
 <template>
-	<div class="container">
-		<div class="columns is-centered">
-			<div class="column is-three-fifths">
-				<nav class="navbar" role="navigation" aria-label="main navigation">
-					<div class="navbar-brand">
-						<a role="button" class="navbar-burger" :class="{ 'is-active': menuActive }" aria-label="menu" aria-expanded="false" @click="toggleBurger">
-							<span aria-hidden="true"></span>
-							<span aria-hidden="true"></span>
-							<span aria-hidden="true"></span>
-						</a>
-					</div>
-					<div class="navbar-menu" :class="{ 'is-active': menuActive }">
-						<div class="navbar-end">
-							<RouterLink to="/add-account" class="navbar-item">{{ $t("navbar.addAccount") }}</RouterLink>
-							<RouterLink to="/manage-accounts" class="navbar-item">{{ $t("navbar.manageAccounts") }}</RouterLink>
-							<RouterLink to="/config" class="navbar-item">{{ $t("navbar.config") }}</RouterLink>
-							<RouterLink to="/about" class="navbar-item">{{ $t("navbar.about") }}</RouterLink>
-						</div>
-					</div>
-				</nav>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavBar" aria-controls="mainNavBar" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNavBar">
+				<LayoutComponent>
+					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+						<li class="nav-item">
+							<RouterLink to="/add-account" class="nav-link">{{ $t("navbar.addAccount") }}</RouterLink>
+						</li>
+						<li class="nav-item">
+							<RouterLink to="/manage-accounts" class="nav-link">{{ $t("navbar.manageAccounts") }}</RouterLink>
+						</li>
+						<li class="nav-item">
+							<RouterLink to="/config" class="nav-link">{{ $t("navbar.config") }}</RouterLink>
+						</li>
+						<li class="nav-item">
+							<RouterLink to="/about" class="nav-link">{{ $t("navbar.about") }}</RouterLink>
+						</li>
+					</ul>
+				</LayoutComponent>
 			</div>
 		</div>
-	</div>
+	</nav>
 </template>

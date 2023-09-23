@@ -12,6 +12,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [Unreleased]
+
+### Changed
+- The style has been entirely reworked using Bootstrap instead of Bulma
+
+
 ## [0.3.0] - 2023-08-25
 
 ### Added
@@ -22,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Secret keys are now restricted to 128 bits (16 bytes) or 256 bits (32 bytes)
 - The local part cannot contain the separator
 - The HTML lang attribute is now set to the appropriate language
+
 
 ## [0.2.0] - 2023-08-11
 

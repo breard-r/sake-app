@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - The style has been entirely reworked using Bootstrap instead of Bulma
+- It is now impossible to include the separator in the dedicated name
 
 
 ## [0.3.0] - 2023-08-25

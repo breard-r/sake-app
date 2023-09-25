@@ -29,15 +29,20 @@ const generatedAddr = computed(() => {
 		const raw_account = accounts.value.find((e) => e.id == selectedAccountId.value);
 		if (raw_account) {
 			const account = fromRawAccount(raw_account);
-			var hasher = hmac.create(sha256, account.key);
-			hasher.update(account.localPart);
-			hasher.update(account.separator);
-			hasher.update(subAddrName.value);
-			const mac = hasher.digest();
-			const offset = mac[mac.length - 1] & 0xf;
-			const reduced_mac = mac.slice(offset, offset + 5);
-			const code = base32Encode(reduced_mac, 'RFC4648', { padding: false }).toLowerCase();
-			return `${account.localPart}${account.separator}${subAddrName.value}${account.separator}${code}@${account.domain}`;
+			if (subAddrName.value.indexOf(account.separator) != -1) {
+				subAddrName.value = subAddrName.value.replaceAll(account.separator, '');
+			}
+			if (subAddrName.value) {
+				var hasher = hmac.create(sha256, account.key);
+				hasher.update(account.localPart);
+				hasher.update(account.separator);
+				hasher.update(subAddrName.value);
+				const mac = hasher.digest();
+				const offset = mac[mac.length - 1] & 0xf;
+				const reduced_mac = mac.slice(offset, offset + 5);
+				const code = base32Encode(reduced_mac, 'RFC4648', { padding: false }).toLowerCase();
+				return `${account.localPart}${account.separator}${subAddrName.value}${account.separator}${code}@${account.domain}`;
+			}
 		}
 	}
 	return '';

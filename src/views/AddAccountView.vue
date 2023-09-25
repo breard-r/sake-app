@@ -62,6 +62,7 @@ const addAccount = () => {
 				separator: separator.value,
 				domain: domainName.value,
 				key: key,
+				isDefault: false,
 			};
 			accounts.value.push(newAccount);
 			return toMainView();

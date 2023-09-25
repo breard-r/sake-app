@@ -11,8 +11,12 @@ import LayoutComponent from '../components/LayoutComponent.vue';
 import NavBarComponent from '../components/NavBarComponent.vue';
 
 const router = useRouter();
-const accounts = sortAccounts(useStorage('sake-accounts', []));
-const selectedAccountId = ref(accounts.value[0].id);
+const accounts = useStorage('sake-accounts', []);
+const sortedAccounts = computed(() => sortAccounts(accounts.value));
+const selectedAccountId = ref((() => {
+	const def = accounts.value.find((a) => a.isDefault);
+	return def ? def.id : accounts.value[0].id;
+})());
 const subAddrName = ref('');
 
 const fromRawAccount = (raw_account) => {
@@ -63,7 +67,7 @@ const resetForm = () => {
 		<div class="mb-3">
 			<label class="form-label" for="account-name">{{ $t("main.account") }}</label>
 			<select class="form-select" id="account-name" v-model="selectedAccountId">
-				<option v-for="account in accounts" :key="account.id" :value="account.id">{{ account.localPart }}@{{ account.domain }}</option>
+				<option v-for="account in sortedAccounts" :key="account.id" :value="account.id">{{ account.localPart }}@{{ account.domain }}</option>
 			</select>
 		</div>
 

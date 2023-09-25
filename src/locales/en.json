@@ -71,6 +71,8 @@
 	},
 	"manageAccounts": {
 		"title": "Accounts",
+		"isDefault": "default",
+		"setDefault": "Set default",
 		"delete": "@:invariants.controls.delete",
 		"close": "@:invariants.controls.close"
 	}

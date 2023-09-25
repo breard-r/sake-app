@@ -51,6 +51,9 @@
 	"config": {
 		"title": "Préférences",
 		"language": "Langue",
+		"colorMode": "Thème",
+		"lightTheme": "Clair",
+		"darkTheme": "Sombre",
 		"close": "@:invariants.controls.close"
 	},
 	"deleteAccount": {

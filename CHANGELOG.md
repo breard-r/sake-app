@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Possibility to set a default account
+- Dark mode
 
 ### Changed
 - The style has been entirely reworked using Bootstrap instead of Bulma

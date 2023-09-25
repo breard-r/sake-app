@@ -7,17 +7,24 @@ import App from './App.vue';
 import router from './router';
 import messages from '@intlify/unplugin-vue-i18n/messages';
 
-const default_locale = 'en';
-const stored_locale = useStorage('sake-locale', '');
-if (!stored_locale.value) {
-	stored_locale.value = default_locale;
-}
-document.documentElement.setAttribute('lang', stored_locale.value);
+const setGlobalAttribute = (attrName, storageName, defaultValue) => {
+	const stored_value = useStorage(storageName, '');
+	if (!stored_value.value) {
+		stored_value.value = defaultValue;
+	}
+	document.documentElement.setAttribute(attrName, stored_value.value);
+	return {
+		'stored': stored_value,
+		'defaultValue': defaultValue,
+	};
+};
+const locale = setGlobalAttribute('lang', 'sake-locale', 'en');
+const colorMode = setGlobalAttribute('data-bs-theme', 'sake-color-mode', 'light');
 
 const i18n = createI18n({
 	legacy: false,
-	locale: stored_locale.value,
-	fallbackLocale: default_locale,
+	locale: locale.stored.value,
+	fallbackLocale: locale.defaultValue,
 	messages,
 });
 

@@ -9,6 +9,11 @@ import LayoutComponent from '../components/LayoutComponent.vue';
 const router = useRouter();
 const stored_locale = useStorage('sake-locale', '');
 const { t, locale } = useI18n({ useScope: 'global' });
+const colorMode = useStorage('sake-color-mode');
+const allowedColorModes = [
+	'light',
+	'dark',
+];
 
 const toMainView = () => {
 	return router.push('/');
@@ -17,6 +22,10 @@ const toMainView = () => {
 watch(locale, async (newLocale) => {
 	stored_locale.value = newLocale;
 	document.documentElement.setAttribute('lang', newLocale);
+});
+watch(colorMode, async (newColorMode) => {
+	console.log(`new color mode: ${newColorMode}`);
+	document.documentElement.setAttribute('data-bs-theme', newColorMode);
 });
 </script>
 
@@ -28,6 +37,12 @@ watch(locale, async (newLocale) => {
 			<label class="form-label" for="app-language">{{ $t("config.language") }}</label>
 			<select class="form-select" id="app-language" v-model="$i18n.locale">
 				<option v-for="locale_id in $i18n.availableLocales" :key="`locale-${locale_id}`" :value="locale_id">{{ $t("locale_name", 1, { locale: locale_id}) }}</option>
+			</select>
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="app-color-mode">{{ $t("config.colorMode") }}</label>
+			<select class="form-select" id="app-color-mode" v-model="colorMode">
+				<option v-for="mode in allowedColorModes" :key="mode" :value="mode">{{ $t(`config.${mode}Theme`) }}</option>
 			</select>
 		</div>
 

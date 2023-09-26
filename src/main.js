@@ -1,5 +1,6 @@
 import './assets/main.sass';
 
+import { allowedColorModes, allowedLocales } from './const';
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 import { useStorage } from '@vueuse/core';
@@ -7,19 +8,22 @@ import App from './App.vue';
 import router from './router';
 import messages from '@intlify/unplugin-vue-i18n/messages';
 
-const setGlobalAttribute = (attrName, storageName, defaultValue) => {
+const setGlobalAttribute = (attrName, storageName, defaultValue, allowedValues) => {
 	const stored_value = useStorage(storageName, '');
 	if (!stored_value.value) {
 		stored_value.value = defaultValue;
 	}
 	document.documentElement.setAttribute(attrName, stored_value.value);
+	if (!allowedValues.includes(stored_value.value)) {
+		stored_value.value = defaultValue;
+	}
 	return {
 		'stored': stored_value,
 		'defaultValue': defaultValue,
 	};
 };
-const locale = setGlobalAttribute('lang', 'sake-locale', 'en');
-const colorMode = setGlobalAttribute('data-bs-theme', 'sake-color-mode', 'light');
+const locale = setGlobalAttribute('lang', 'sake-locale', 'en', allowedLocales);
+const colorMode = setGlobalAttribute('data-bs-theme', 'sake-color-mode', 'light', allowedColorModes);
 
 const i18n = createI18n({
 	legacy: false,

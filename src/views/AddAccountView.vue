@@ -150,9 +150,11 @@ const setErrorMessage = (messageId, messageType) => {
 	}
 	return true;
 };
-const resetErrorMessage = () => {
+const resetFloatingErrorMessage = () => {
 	errorMessageId.value = '';
-
+};
+const resetErrorMessage = () => {
+	resetFloatingErrorMessage();
 	separatorErrorMessageId.value = '';
 	localPartErrorMessageId.value = '';
 	addrKeyErrorMessageId.value = '';
@@ -165,7 +167,7 @@ const resetErrorMessage = () => {
 
 		<div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="errorMessageId">
 			{{ $t(errorMessageId) }}
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click="resetErrorMessage"></button>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click="resetFloatingErrorMessage"></button>
 		</div>
 
 		<div class="mb-3">

@@ -6,3 +6,4 @@ export const allowedLocales = [
 	'en',
 	'fr',
 ];
+export const resetToDefaultAccount = true;

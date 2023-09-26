@@ -53,6 +53,7 @@
 		"title": "Preferences",
 		"language": "Language",
 		"colorMode": "Theme",
+		"resetToDefault": "Switch to the default account when the new sub-address form is reset",
 		"lightTheme": "Light",
 		"darkTheme": "Dark",
 		"close": "@:invariants.controls.close"

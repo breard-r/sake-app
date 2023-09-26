@@ -1,5 +1,6 @@
 <script setup>
 import { sortAccounts } from '../accounts';
+import { resetToDefaultAccount } from '../const';
 import { ref, computed } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core';
@@ -12,11 +13,13 @@ import NavBarComponent from '../components/NavBarComponent.vue';
 
 const router = useRouter();
 const accounts = useStorage('sake-accounts', []);
+const resetToDefault = useStorage('sake-reset-to-default', resetToDefaultAccount);
 const sortedAccounts = computed(() => sortAccounts(accounts.value));
-const selectedAccountId = ref((() => {
+const getDefaultAccount = () => {
 	const def = accounts.value.find((a) => a.isDefault);
 	return def ? def.id : accounts.value[0].id;
-})());
+};
+const selectedAccountId = ref(getDefaultAccount());
 const subAddrName = ref('');
 
 const fromRawAccount = (raw_account) => {
@@ -56,6 +59,9 @@ const copyAddr = () => {
 };
 const resetForm = () => {
 	subAddrName.value = '';
+	if (resetToDefault.value) {
+		selectedAccountId.value = getDefaultAccount();
+	}
 };
 </script>
 

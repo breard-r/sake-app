@@ -53,6 +53,7 @@
 		"title": "Préférences",
 		"language": "Langue",
 		"colorMode": "Thème",
+		"resetToDefault": "Basculer sur le compte par défaut lorsque le formulaire de sous-adresse est réinitialisé",
 		"lightTheme": "Clair",
 		"darkTheme": "Sombre",
 		"close": "@:invariants.controls.close"

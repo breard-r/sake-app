@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The style has been entirely reworked using Bootstrap instead of Bulma
 - It is now impossible to include the separator in the dedicated name
 - When adding a new account, error messages are displayed alongside each affected elements whenever possible
+- By default, the new sub-address form reset button switches to the default account
 
 ## Fixed
 - Invalid preferences are now automatically corrected

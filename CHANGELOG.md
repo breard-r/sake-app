@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 - Invalid preferences are now automatically corrected
+- It is now impossible to add the same account twice
 
 
 ## [0.3.0] - 2023-08-25

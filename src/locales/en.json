@@ -35,6 +35,7 @@
 		"addAccount": "Add account",
 		"cancel": "@:invariants.controls.cancel",
 		"error": {
+			"accountAlreadyExists": "You already have an account on this domain that uses this local part.",
 			"invalidBase64": "The key must be a valid base64 string.",
 			"invalidKeyLength": "The key's length must be either 128 bits (16 bytes) or 256 bits (32 bytes).",
 			"invalidSeparator": "The separator must be a single character.",

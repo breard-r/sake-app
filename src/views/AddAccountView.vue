@@ -51,11 +51,24 @@ const addAccount = () => {
 		resetErrorMessage();
 		var hasError = false;
 		var key = null;
+		var accountId = null;
 		if (separator.value.length != 1) {
 			hasError = setErrorMessage('addAccount.error.invalidSeparator', separatorErrorMessageId);
 		}
-		if (localPart.value.includes(separator.value)) {
-			hasError = setErrorMessage('addAccount.error.localPartSeparator', localPartErrorMessageId);
+		try {
+			if (localPart.value.includes(separator.value)) {
+				throw new Error('addAccount.error.localPartSeparator');
+			}
+			accountId = `${localPart.value}@${domainName.value}`;
+			for (const acc of accounts.value) {
+				const comp = `${acc.localPart}@${acc.domain}`;
+				if (accountId == comp) {
+					throw new Error('addAccount.error.accountAlreadyExists');
+				}
+			}
+		} catch (e) {
+			console.log(e);
+			hasError = setErrorMessage(e.message, localPartErrorMessageId);
 		}
 		try {
 			key = base64Decode(privateKey.value);
@@ -65,8 +78,8 @@ const addAccount = () => {
 		} catch (e) {
 			hasError = setErrorMessage(e.message, addrKeyErrorMessageId);
 		}
-		if (!hasError) {
-			const hash = sha256(`${localPart.value}@${domainName.value}`);
+		if (!hasError && key && accountId) {
+			const hash = sha256(accountId);
 			const newAccount = {
 				id: base32Encode(hash, 'RFC4648', { padding: false }).toLowerCase(),
 				localPart: localPart.value,

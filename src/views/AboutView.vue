@@ -6,7 +6,7 @@ import LayoutComponent from '../components/LayoutComponent.vue';
 import ExternalLinkComponent from '../components/ExternalLinkComponent.vue';
 
 const router = useRouter();
-const repoUrl = 'https://github.com/breard-r/sake-app';
+const repoUrl = 'https://git.what.tf/rodolphe/sake-app';
 
 const toMainView = () => {
 	return router.push('/');

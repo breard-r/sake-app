@@ -15,8 +15,12 @@ const localPart = ref('');
 const separator = ref('+');
 const domainName = ref('');
 const privateKey = ref('');
-const errorMessageId = ref('');
 const authorizedKeyLengths = [16, 32];
+
+const errorMessageId = ref('');
+const separatorErrorMessageId = ref('');
+const localPartErrorMessageId = ref('');
+const addrKeyErrorMessageId = ref('');
 
 const base64Decode = (str_b64) => {
 	try {
@@ -44,17 +48,24 @@ const addDisabled = computed(() => {
 });
 const addAccount = () => {
 	if (!addDisabled.value) {
+		resetErrorMessage();
+		var hasError = false;
+		var key = null;
+		if (separator.value.length != 1) {
+			hasError = setErrorMessage('addAccount.error.invalidSeparator', separatorErrorMessageId);
+		}
+		if (localPart.value.includes(separator.value)) {
+			hasError = setErrorMessage('addAccount.error.localPartSeparator', localPartErrorMessageId);
+		}
 		try {
-			if (separator.value.length != 1) {
-				throw new Error('addAccount.error.invalidSeparator');
-			}
-			if (localPart.value.includes(separator.value)) {
-				throw new Error('addAccount.error.localPartSeparator');
-			}
-			const key = base64Decode(privateKey.value);
+			key = base64Decode(privateKey.value);
 			if (!authorizedKeyLengths.includes(key.length)) {
 				throw new Error('addAccount.error.invalidKeyLength');
 			}
+		} catch (e) {
+			hasError = setErrorMessage(e.message, addrKeyErrorMessageId);
+		}
+		if (!hasError) {
 			const hash = sha256(`${localPart.value}@${domainName.value}`);
 			const newAccount = {
 				id: base32Encode(hash, 'RFC4648', { padding: false }).toLowerCase(),
@@ -66,8 +77,6 @@ const addAccount = () => {
 			};
 			accounts.value.push(newAccount);
 			return toMainView();
-		} catch (e) {
-			errorMessageId.value = e.message;
 		}
 	}
 };
@@ -119,15 +128,21 @@ const toMainView = () => {
 };
 
 // Error message
-const setErrorMessage = (messageId) => {
-	if (messageId.startsWith('addAccount.error.')) {
-		errorMessageId.value = messageId;
+const setErrorMessage = (messageId, messageType) => {
+	const messageIdClean = messageId.startsWith('addAccount.error.') ? messageId : 'addAccount.error.unknown';
+	if (messageType) {
+		messageType.value = messageIdClean;
 	} else {
-		errorMessageId.value = 'addAccount.error.unknown';
+		errorMessageId.value = messageIdClean;
 	}
+	return true;
 };
 const resetErrorMessage = () => {
 	errorMessageId.value = '';
+
+	separatorErrorMessageId.value = '';
+	localPartErrorMessageId.value = '';
+	addrKeyErrorMessageId.value = '';
 };
 </script>
 
@@ -142,11 +157,13 @@ const resetErrorMessage = () => {
 
 		<div class="mb-3">
 			<label class="form-label" for="new-addr-local-part">{{ $t("addAccount.localPart") }}</label>
-			<input class="form-control" type="text" id="new-addr-local-part" v-model="localPart">
+			<input :class="{ 'form-control': true, 'is-invalid': localPartErrorMessageId}" type="text" id="new-addr-local-part" v-model="localPart">
+			<div class="invalid-feedback" v-if="localPartErrorMessageId">{{ $t(localPartErrorMessageId) }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label" for="new-addr-separator">{{ $t("addAccount.separator") }}</label>
-			<input class="form-control" type="text" id="new-addr-separator" v-model="separator">
+			<input :class="{ 'form-control': true, 'is-invalid': separatorErrorMessageId}" type="text" id="new-addr-separator" v-model="separator">
+			<div class="invalid-feedback" v-if="separatorErrorMessageId">{{ $t(separatorErrorMessageId) }}</div>
 		</div>
 		<div class="mb-3">
 			<label class="form-label" for="new-addr-domain">{{ $t("addAccount.domainName") }}</label>
@@ -155,8 +172,9 @@ const resetErrorMessage = () => {
 		<div class="mb-3">
 			<label class="form-label" for="new-addr-key">{{ $t("addAccount.privateKey") }}</label>
 			<div class="input-group">
-				<input class="form-control" type="text" id="new-addr-key" v-model="privateKey">
+				<input :class="{ 'form-control': true, 'is-invalid': addrKeyErrorMessageId}" type="text" id="new-addr-key" v-model="privateKey">
 				<button class="btn btn-primary" type="button" @click="showQrCodeScanner">{{ $t("addAccount.scan") }}</button>
+				<div class="invalid-feedback" v-if="addrKeyErrorMessageId">{{ $t(addrKeyErrorMessageId) }}</div>
 			</div>
 		</div>
 

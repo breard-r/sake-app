@@ -1,6 +1,7 @@
 import './assets/main.sass';
 
 import { allowedColorModes, allowedLocales } from './const';
+import { getDefaultLocale } from './locales_utils';
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 import { useStorage } from '@vueuse/core';
@@ -22,7 +23,7 @@ const setGlobalAttribute = (attrName, storageName, defaultValue, allowedValues) 
 		'defaultValue': defaultValue,
 	};
 };
-const locale = setGlobalAttribute('lang', 'sake-locale', 'en', allowedLocales);
+const locale = setGlobalAttribute('lang', 'sake-locale', getDefaultLocale(), allowedLocales);
 const colorMode = setGlobalAttribute('data-bs-theme', 'sake-color-mode', 'light', allowedColorModes);
 
 const i18n = createI18n({

@@ -32,6 +32,7 @@
 		"domainName": "Domain name",
 		"privateKey": "Private key",
 		"scan": "Scan",
+		"scanTitle": "Scan a QR code",
 		"addAccount": "Add account",
 		"cancel": "@:invariants.controls.cancel",
 		"error": {

@@ -1,9 +1,10 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, reactive, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core';
 import { QrcodeStream, setZXingModuleOverrides } from 'vue-qrcode-reader';
 import { sha256 } from '@noble/hashes/sha256';
+import { Modal } from 'bootstrap';
 import base32Encode from 'base32-encode';
 import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
@@ -16,6 +17,9 @@ const separator = ref('+');
 const domainName = ref('');
 const privateKey = ref('');
 const authorizedKeyLengths = [16, 32];
+const state = reactive({
+	QrCodeModal: null,
+});
 
 const errorMessageId = ref('');
 const separatorErrorMessageId = ref('');
@@ -103,17 +107,26 @@ setZXingModuleOverrides({
 		return prefix + path;
 	},
 });
+onMounted(() => {
+	state.QrCodeModal = new Modal('#qr-code-modal', {});
+});
 const scanQrCode = ref(false);
 const showQrCodeScanner = (data) => {
+	state.QrCodeModal.show();
 	scanQrCode.value = true;
+};
+const hideQrCodeScanner = () => {
+	scanQrCode.value = false;
+	state.QrCodeModal.hide();
 };
 const onQrCodeDetected = (result_list) => {
 	if (result_list.length >= 1) {
 		privateKey.value = result_list[0].rawValue;
-		scanQrCode.value = false;
+		hideQrCodeScanner();
 	}
 };
 const onQrCodeError = (err) => {
+	hideQrCodeScanner();
 	if (err.name === 'NotAllowedError') {
 		setErrorMessage('addAccount.error.cameraNotAllowed');
 	} else if (err.name === 'NotFoundError') {
@@ -193,7 +206,19 @@ const resetErrorMessage = () => {
 			</div>
 		</div>
 
-		<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected" @error="onQrCodeError"></qrcode-stream>
+		<div class="modal fade" id="qr-code-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $t("addAccount.scanTitle") }}</h1>
+						<button type="button" class="btn-close" aria-label="Close" @click="hideQrCodeScanner"></button>
+					</div>
+					<div class="modal-body">
+						<qrcode-stream v-if="scanQrCode" @detect="onQrCodeDetected" @error="onQrCodeError"></qrcode-stream>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<ButtonGroupComponent>
 			<button type="button" class="btn btn-primary" :disabled="addDisabled" @click="addAccount">{{ $t("addAccount.addAccount") }}</button>

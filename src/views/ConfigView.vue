@@ -1,5 +1,5 @@
 <script setup>
-import { resetToDefaultAccount } from '../const';
+import { allowedColorModes, resetToDefaultAccount } from '../const';
 import { watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
@@ -12,10 +12,6 @@ const stored_locale = useStorage('sake-locale', '');
 const { t, locale } = useI18n({ useScope: 'global' });
 const colorMode = useStorage('sake-color-mode');
 const resetToDefault = useStorage('sake-reset-to-default', resetToDefaultAccount);
-const allowedColorModes = [
-	'light',
-	'dark',
-];
 
 const toMainView = () => {
 	return router.push('/');

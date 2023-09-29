@@ -27,6 +27,13 @@ update_app_version()
 	jq ".version = \"${new_version}\"" "package.json" >"${tmp_file}"
 	mv "${tmp_file}" "package.json"
 	sed -i "s/## \[Unreleased\]/## \[${new_version}\] - ${current_date}/" "CHANGELOG.md"
+	update_dependencies
+}
+
+update_dependencies()
+{
+	npm update
+	npm outdated
 }
 
 check_working_directory()
@@ -105,6 +112,7 @@ main()
 	local new_version
 	local confirm_release
 
+	update_dependencies
 	check_working_directory
 
 	display_app_version

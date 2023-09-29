@@ -23,8 +23,12 @@ const setGlobalAttribute = (attrName, storageName, defaultValue, allowedValues) 
 		'defaultValue': defaultValue,
 	};
 };
+const getDefaultColorMode = () => {
+	const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+	return darkMediaQuery.matches ? 'dark' : 'light';
+};
 const locale = setGlobalAttribute('lang', 'sake-locale', getDefaultLocale(), allowedLocales);
-const colorMode = setGlobalAttribute('data-bs-theme', 'sake-color-mode', 'light', allowedColorModes);
+const colorMode = setGlobalAttribute('data-bs-theme', 'sake-color-mode', getDefaultColorMode(), allowedColorModes);
 
 const i18n = createI18n({
 	legacy: false,

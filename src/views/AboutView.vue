@@ -4,6 +4,7 @@ import { version } from '../../package.json';
 import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
 import ExternalLinkComponent from '../components/ExternalLinkComponent.vue';
+import NavBarComponent from '../components/NavBarComponent.vue';
 
 const router = useRouter();
 const repoUrl = 'https://git.what.tf/rodolphe/sake-app';
@@ -14,6 +15,7 @@ const toMainView = () => {
 </script>
 
 <template>
+	<NavBarComponent />
 	<LayoutComponent>
 		<h1>{{ $t("about.title") }}</h1>
 		<h4>{{ $t("about.name") }}</h4>

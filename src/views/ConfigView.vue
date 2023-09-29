@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n';
 import { useStorage } from '@vueuse/core';
 import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
+import NavBarComponent from '../components/NavBarComponent.vue';
 
 const router = useRouter();
 const stored_locale = useStorage('sake-locale', '');
@@ -28,6 +29,7 @@ watch(colorMode, async (newColorMode) => {
 </script>
 
 <template>
+	<NavBarComponent />
 	<LayoutComponent>
 		<h1>{{ $t("config.title") }}</h1>
 

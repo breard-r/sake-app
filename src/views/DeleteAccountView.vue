@@ -3,6 +3,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core';
 import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
+import NavBarComponent from '../components/NavBarComponent.vue';
 
 const accounts = useStorage('sake-accounts', []);
 const router = useRouter();
@@ -19,6 +20,7 @@ const toMainView = () => {
 </script>
 
 <template>
+	<NavBarComponent />
 	<LayoutComponent>
 		<h1>{{ $t("deleteAccount.title") }}</h1>
 

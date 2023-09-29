@@ -8,6 +8,7 @@ import { Modal } from 'bootstrap';
 import base32Encode from 'base32-encode';
 import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
+import NavBarComponent from '../components/NavBarComponent.vue';
 import wasmFile from "../../node_modules/@sec-ant/zxing-wasm/dist/reader/zxing_reader.wasm?url";
 
 const accounts = useStorage('sake-accounts', []);
@@ -175,6 +176,7 @@ const resetErrorMessage = () => {
 </script>
 
 <template>
+	<NavBarComponent v-if="!cancellDisabled" />
 	<LayoutComponent>
 		<h1>{{ $t("addAccount.title") }}</h1>
 

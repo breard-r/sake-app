@@ -5,6 +5,7 @@ import { RouterLink, useRouter } from 'vue-router';
 import { useStorage } from '@vueuse/core';
 import ButtonGroupComponent from '../components/ButtonGroupComponent.vue';
 import LayoutComponent from '../components/LayoutComponent.vue';
+import NavBarComponent from '../components/NavBarComponent.vue';
 
 const router = useRouter();
 const accounts = useStorage('sake-accounts', []);
@@ -25,6 +26,7 @@ const toMainView = () => {
 </script>
 
 <template>
+	<NavBarComponent />
 	<LayoutComponent>
 		<h1>{{ $t("manageAccounts.title") }}</h1>
 

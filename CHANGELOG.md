@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - If the browser uses a dark theme, the default theme is also set to dark
 
+### Fixed
+- The account deletion view is now emphasized the same way it was before
+
 
 ## [0.4.0] - 2023-09-26
 

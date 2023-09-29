@@ -23,7 +23,7 @@ const toMainView = () => {
 		<h1>{{ $t("deleteAccount.title") }}</h1>
 
 		<p>{{ $t("deleteAccount.account") }}</p>
-		<p class="has-text-weight-semibold is-size-5">{{ account.localPart }}@{{ account.domain }}</p>
+		<p class="fw-semibold fs-5">{{ account.localPart }}@{{ account.domain }}</p>
 		<p>{{ $t("deleteAccount.confirm") }}</p>
 
 		<ButtonGroupComponent>
